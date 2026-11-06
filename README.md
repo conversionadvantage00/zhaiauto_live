@@ -2,7 +2,7 @@
 
 Dealer microsite for **Zhai Auto, George** (Peugeot, Citroën, Opel, Jeep, Fiat), built and managed by [Conversion Advantage](https://conversionadvantage.co.za).
 
-- **This repo:** the live site, served by GitHub Pages at https://conversionadvantage00.github.io/zhaiauto_live/ (moving to https://zhaiauto.co.za/).
+- **This repo:** the live site, hosted on Cloudflare Pages at https://zhaiauto-live.pages.dev/ (moving to https://zhaiauto.co.za/).
 - **Staging / preview:** the separate `zhaiauto_staging` repo. Changes are approved there first.
 
 ## Please don't edit files here directly
@@ -15,6 +15,7 @@ The files in this repo are exports. The master working copy (with the built-in e
 |---|---|
 | `index.html` | The whole one-page site (layout, code and stock data in one file) |
 | `privacy.html` | POPIA privacy notice, linked from the footer and the form consent box |
+| `_headers` | Cloudflare caching rules (images 30 days, page always fresh) and noindex for the pages.dev address |
 | `img/` | Car photos (`img/cars/`), site images, brand logos, video loops, favicons and phone-sized copies (`img/m/`) |
 
 ## How updates happen

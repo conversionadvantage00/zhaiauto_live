@@ -1,0 +1,16 @@
+# Cloudflare Pages headers (zhaiauto_live)
+# Keep the pages.dev address out of Google; the real site is zhaiauto.co.za.
+https://zhaiauto-live.pages.dev/*
+  X-Robots-Tag: noindex
+
+# Car photos and site images: cache 30 days (new cars get new file names).
+/img/*
+  Cache-Control: public, max-age=2592000
+
+# The page itself: always check for a fresh copy, so stock changes show at once.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/privacy.html
+  Cache-Control: public, max-age=0, must-revalidate
