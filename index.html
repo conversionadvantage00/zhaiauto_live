@@ -1582,16 +1582,16 @@ main{padding-block:0 64px}
       "plural": "models"
     },
     "forms": {
-      "_help": "Formspree form IDs (the part after formspree.io/f/). Groups: sales = enquire, test drive, viewing; finance; tradein; service = service, maintenance plan; parts; general = contact. uploads: true only on a paid plan with file uploads on.",
+      "_help": "Formspree form IDs (the part after formspree.io/f/). Groups: sales = enquire, test drive, viewing; finance; tradein; service = service, maintenance plan; parts; general = contact. uploads: shows the trade-in photo field (up to 5 photos); if Formspree refuses the files, the enquiry is re-sent without them.",
       "endpoints": {
-        "sales": "mwllzjlb",
-        "finance": "mwllzjlb",
-        "tradein": "mwllzjlb",
-        "service": "mwllzjlb",
-        "parts": "mwllzjlb",
-        "general": "mwllzjlb"
+        "sales": "xjyynrnz",
+        "finance": "maeerjrg",
+        "tradein": "xqpprbrr",
+        "service": "xljjqlrr",
+        "parts": "xyeerpgy",
+        "general": "xeaayzje"
       },
-      "uploads": false
+      "uploads": true
     },
     "tracking": {
       "_help": "Google Tag Manager container ID. The same ID must also be in the GTM snippet in <head> and in privacy.html. dataLayer events: see TRACKING-PLAN.md.",
@@ -5227,7 +5227,7 @@ function formHTML(type, v){
      <div class="fld"><label for="${P}year">Year <em>*</em></label><input id="${P}year" name="year" inputmode="numeric" required><div class="err"></div></div>
      <div class="fld"><label for="${P}km">Mileage (km) <em>*</em></label><input id="${P}km" name="km" inputmode="numeric" required><div class="err"></div></div>
      <div class="fld"><label for="${P}fin2">Still financed?</label><select id="${P}fin2" name="financed"><option>No</option><option>Yes</option></select></div>
-     ${FORMS.uploads ? `<div class="fld full"><label for="${P}photos">Photos of your car</label><input id="${P}photos" name="photos" type="file" accept="image/*" multiple style="padding-top:11px"></div>` : `<div class="fld full"><p class="note" style="margin:0">We may ask you for a few photos on WhatsApp once we have your details.</p></div>`}`;
+     ${FORMS.uploads ? `<div class="fld full"><label for="${P}photos">Photos of your car (optional, up to 5)</label><input id="${P}photos" name="photos" type="file" accept="image/*" multiple style="padding-top:11px"></div>` : `<div class="fld full"><p class="note" style="margin:0">We may ask you for a few photos on WhatsApp once we have your details.</p></div>`}`;
   const btn = {service:'Request booking', parts:'Send parts enquiry', maintenance:'Get my quote', enquire:'Send enquiry', testdrive:'Request test drive', finance:'Submit application', tradein:'Get my valuation', viewing:'Request a viewing', contact:'Send message'}[type];
   return `<form class="form" data-type="${type}" ${v ? `data-vid="${esc(v.id)}"` : ''} novalidate>${pin}${body}
     <div class="consent">
@@ -5505,7 +5505,7 @@ if ('IntersectionObserver' in window) requestAnimationFrame(() => {
 const FORMS = (DATA.settings && DATA.settings.forms) || {endpoints:{}};
 const FORM_GROUP = {enquire:'sales', testdrive:'sales', viewing:'sales', finance:'finance', tradein:'tradein', service:'service', maintenance:'service', parts:'parts', contact:'general'};
 const FORM_NAME = {enquire:'Vehicle enquiry', testdrive:'Test drive request', viewing:'Private viewing request', finance:'Finance application', tradein:'Trade-in valuation', service:'Service booking', maintenance:'Maintenance plan quote', parts:'Parts enquiry', contact:'General enquiry'};
-function leadPayload(form, type, v){
+function leadPayload(form, type, v, withFiles = true){
   const fd = new FormData(), car = x => x ? `${x.year && !String(x.title).startsWith(String(x.year)) ? x.year + ' ' : ''}${x.title} ${x.sub}`.replace(/\s+/g, ' ').trim() : '';
   const picked = $('[name="car"]', form), pv = picked && picked.value ? V[picked.value] : null, veh = v || pv;
   const name = (($('[name="first"]', form) || {}).value || '').trim() + ' ' + (($('[name="last"]', form) || {}).value || '').trim();
@@ -5532,7 +5532,9 @@ function leadPayload(form, type, v){
   fd.append('POPIA consent', 'Yes');
   fd.append('Marketing opt-in', $('[name="marketing"]', form).checked ? 'Yes' : 'No');
   fd.append('_gotcha', ($('[name="_gotcha"]', form) || {}).value || '');
-  if (FORMS.uploads) $$('input[type="file"]', form).forEach(i => [...i.files].forEach(f => fd.append(i.name, f)));
+  const files = FORMS.uploads ? $$('input[type="file"]', form).flatMap(i => [...i.files].slice(0, 5).map(f => [i.name, f])) : [];
+  if (withFiles) files.forEach(([n, f]) => fd.append(n, f));
+  else if (files.length) fd.append('Photos', files.length + ' photo(s) chosen but they could not be uploaded. Please ask the customer to WhatsApp them.');
   return fd;
 }
 function wireForm(form){
@@ -5563,8 +5565,10 @@ function wireForm(form){
       track('lead_error', Object.assign({lead_type: type, form_type: type, lead_group: FORM_GROUP[type]}, trkVeh(leadVeh())));
     };
     if (!id) return fail();
-    fetch('https://formspree.io/f/' + id, {method:'POST', body: leadPayload(form, type, v), headers:{Accept:'application/json'}})
-      .then(r => r.ok ? done() : fail()).catch(fail);
+    const send = withFiles => fetch('https://formspree.io/f/' + id, {method:'POST', body: leadPayload(form, type, v, withFiles), headers:{Accept:'application/json'}});
+    const hasFiles = FORMS.uploads && $$('input[type="file"]', form).some(i => i.files.length);
+    const retry = () => hasFiles ? send(false).then(r => r.ok ? done() : fail()).catch(fail) : fail();   // photos refused or too big: the lead still goes through
+    send(true).then(r => r.ok ? done() : retry()).catch(retry);
     function done(){
       const type = form.dataset.type, v = form.dataset.vid ? V[form.dataset.vid] : null;
       const name = $('[name="first"]', form).value.trim();
