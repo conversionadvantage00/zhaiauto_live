@@ -1,0 +1,15 @@
+{
+  "name": "zhaiauto-live",
+  "private": true,
+  "type": "module",
+  "description": "Zhai Auto microsite: Cloudflare Pages build (photo sizes, a page per car, sitemap). See build/build.mjs.",
+  "scripts": {
+    "build": "node build/build.mjs"
+  },
+  "dependencies": {
+    "sharp": "0.34.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

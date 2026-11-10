@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8>
+<!doctype html><html lang="en-ZA"><head><meta charset=utf8>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -28,15 +28,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:title" content="Zhai Auto George | Peugeot, Citroën, Opel, Jeep &amp; Fiat">
 <meta name="twitter:description" content="New Peugeot, Citroën, Opel, Jeep and Fiat cars, current specials, service, parts and finance at Zhai Auto, 78 York Street, George.">
 <meta name="twitter:image" content="https://zhaiauto-live.pages.dev/img/meta/social.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&amp;family=Hanken+Grotesk:wght@400;500;600;700&amp;display=swap">
+<link rel="preload" href="img/fonts/hanken-grotesk-var.woff2" as="font" type="font/woff2" crossorigin="">
 </head><body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W35G996R"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <style>
+/* round 10: fonts are self-hosted (latin subset, variable): Archivo wght 400-800 x wdth 100-125, Hanken Grotesk wght 400-700. OFL licences in img/fonts. */
+@font-face{font-family:"Archivo";font-style:normal;font-weight:400 800;font-stretch:100% 125%;font-display:swap;src:url(img/fonts/archivo-var.woff2) format("woff2")}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:400 700;font-display:swap;src:url(img/fonts/hanken-grotesk-var.woff2) format("woff2")}
+.c-title a.c-link{color:inherit;text-decoration:none}
+.c-title a.c-link:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 /* Layout: one-page dealer microsite; full-bleed card rails per stock section; vehicle popup = Polestar-style two-column takeover (pinned gallery left, scrolling detail right) */
 :root{
   color-scheme:light;
@@ -512,7 +515,7 @@ input[type=range]{width:100%;accent-color:var(--ink);height:24px}
   .loc{grid-template-columns:1fr}
 }
 .g-mob .ttl{padding:18px 0 14px}
-.g-mob .ttl h1{font-size:26px;font-weight:500;margin:0;line-height:1.15}
+.g-mob .ttl h1,.g-mob .ttl .ttl-h{font-size:26px;font-weight:500;margin:0;line-height:1.15}
 .g-mob .ttl p{margin:4px 0 0;color:var(--muted)}
 .gm-stage{position:relative;margin-inline:calc(-1 * max(16px, (100vw - var(--cw)) / 2));background:#eef0f3}
 .gm-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:4/3}
@@ -1329,7 +1332,8 @@ main{padding-block:0 64px}
   finance on a vehicle overrides the dealer defaults for that car only.
   =====================================================================
 -->
-<script type="application/json" id="site-data">{
+<script type="application/json" id="site-data">
+{
   "mobileImages": {
     "cars/jeep-wrangler-sahara": "#b6a3a3",
     "cars/jeep-wrangler-rubicon": "#b6b6b6",
@@ -3827,7 +3831,8 @@ main{padding-block:0 64px}
       "extrasText": "Electric Windows, Air bags, LED lights, Rear-view camera, Aircon, Climate control, Apple CarPlay & Android Auto, Park distance control, Cruise control, ISOFIX, Radio, Sat nav, Leather seats"
     }
   ]
-}</script>
+}
+</script>
 
 <script>try{var __t=(JSON.parse(document.getElementById('site-data').textContent).theme)||{},__m=__t.mode;if(__t.toggle){try{__m=localStorage.getItem('ca-mode')||__m}catch(_){}}if(__m&&__m!=='light')document.documentElement.setAttribute('data-mode',__m)}catch(e){}</script>
 <div class="mock-note" id="mock-note" hidden=""></div>
@@ -3911,8 +3916,9 @@ main{padding-block:0 64px}
 <a class="wa-float" id="wa-float" hidden="" target="_blank" rel="noopener" aria-label="Chat to us on WhatsApp"></a>
 
 <script>
-/* round 9: ownership promises reveal and count up when they scroll into view */
-(function(){
+/* round 9: ownership promises reveal and count up when they scroll into view
+   (round 10: runs on DOMContentLoaded; before, it ran before the main script had built .pg-pact, so it never fired) */
+addEventListener('DOMContentLoaded', function(){
   const box = document.querySelector('.pg-pact'); if (!box) return;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (still || !('IntersectionObserver' in window)) { box.classList.add('in'); return; }
@@ -3922,26 +3928,33 @@ main{padding-block:0 64px}
       const step = t => { const p = Math.min(1, Math.max(0, (t - t0) / d)); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };
       el.textContent = '0'; requestAnimationFrame(step); }); }), {rootMargin: '0px 0px -18% 0px'});
   io.observe(box);
-})();
+});
 </script>
 <script>
-/* round 9e: brand tiles rise in when the grid scrolls into view */
-(function(){
+/* round 9e: brand tiles rise in when the grid scrolls into view (round 10: on DOMContentLoaded, see above) */
+addEventListener('DOMContentLoaded', function(){
   const g = document.querySelector('.bg-grid'); if (!g) return;
   if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
   const r = g.getBoundingClientRect(); if (r.top < innerHeight * .9) return;
   g.classList.add('rv');
   const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { io.disconnect(); g.classList.add('in'); } }), {rootMargin:'0px 0px -12% 0px'});
   io.observe(g);
-})();
+});
 </script>
-
 <script>
 (function(){
 "use strict";
-window.__CA_SRC = window.__CA_SRC || ((hd => { const i = hd.indexOf('<title>'); return i >= 0 ? hd.slice(i) + '\n' : ''; })(document.head.innerHTML) + document.body.innerHTML);   // page source as written, used by the editor to save
+if (window.CAEditor) window.__CA_SRC = window.__CA_SRC || ((hd => { const i = hd.indexOf('<title>'); return i >= 0 ? hd.slice(i) + '\n' : ''; })(document.head.innerHTML) + document.body.innerHTML);   // page source as written, used by the editor to save
 const DATA = JSON.parse(document.getElementById('site-data').textContent);
 const D = DATA.dealer;
+/* ---------- round 10: car addresses ----------
+   The build (build/build.mjs in the live repo) sets window.__CA_PAGES and gives every car its own page at cars/<slug>/
+   (window.__CA_CARPAGE = that car's slug). There the popup shows the car's real address, and opening a car adds a
+   history step, so a phone's Back button closes the car instead of leaving the site. Copies that weren't built
+   (editor, staging on GitHub Pages) keep the #v-<slug> links. */
+const PAGES = !!window.__CA_PAGES, CARPAGE = window.__CA_CARPAGE || '';
+const HOME = PAGES ? new URL('./', document.baseURI).href : location.href.split('#')[0];
+const carHref = v => PAGES ? new URL('cars/' + v.slug + '/', HOME).href : HOME + '#v-' + v.slug;
 
 /* ---------- theme + brand (from data) ---------- */
 if (DATA.theme && DATA.theme.accent) document.documentElement.style.setProperty('--accent', DATA.theme.accent);
@@ -4027,14 +4040,23 @@ function prelaunchCheck(data){
 })();
 const V = Object.fromEntries(DATA.vehicles.map(v => [v.id, v]));
 const SEC_OF = {}; DATA.sections.forEach(s => s.vehicles.forEach(id => { if(!SEC_OF[id]) SEC_OF[id] = s; }));
-const IMG = k => (window.__CA_IMGMAP || {})[k] || (/^(data:|blob:|https?:|\/|\.)/.test(k) ? k : /\.[a-z0-9]{3,4}$/i.test(k) ? 'img/' + k : 'img/' + k + '.jpg');
+/* round 10: the build lists content-hashed copies in window.__CA_RESP: photos {key: [hash, [widths]]} as WebP at those widths,
+   videos {key: [hash, 0, ext]}. IMG gives the full-size file, SRC the smallest WebP that is sharp enough here. */
+const RESP = window.__CA_RESP || {};
+const respFile = k => { const r = RESP[k]; return r && r[2] ? 'img/r/' + String(k).replace(/\.[a-z0-9]{2,4}$/i, '') + '.' + r[0] + '.' + r[2] : null; };
+const IMG = k => (window.__CA_IMGMAP || {})[k] || respFile(k) || (/^(data:|blob:|https?:|\/|\.)/.test(k) ? k : /\.[a-z0-9]{3,4}$/i.test(k) ? 'img/' + k : 'img/' + k + '.jpg');
 /* ---------- images: phone copies + soft lazy loading ----------
    Phones (max 767px) get small WebP copies from img/m/: card 750 wide, gallery 1080 wide, site max 900 on the short side.
    Only photos listed in DATA.mobileImages have copies; anything else (or a missing file) falls back to the original. */
 const PHONE = matchMedia('(max-width:767px)');
 const MOBI = DATA.mobileImages || {};
 const imgKey = k => String(k).replace(/\.(jpe?g|png|webp)$/i, '');
-const SRC = (k, kind) => (PHONE.matches && MOBI[imgKey(k)] && !(window.__CA_IMGMAP || {})[k]) ? 'img/m/' + kind + '/' + imgKey(k) + '.webp' : IMG(k);
+const NEED = {card: () => PHONE.matches ? innerWidth * .9 : 440, gallery: () => PHONE.matches ? innerWidth : Math.min(innerWidth * .62, 1000), site: () => innerWidth};
+const pickW = (ws, kind) => { const dpr = Math.min(devicePixelRatio || 1, kind === 'site' && PHONE.matches ? 3 : 2), need = (NEED[kind] || NEED.site)() * dpr * .9;
+  for (const w of ws) if (w >= need) return w; return ws[ws.length - 1]; };
+const SRC = (k, kind) => { if ((window.__CA_IMGMAP || {})[k]) return IMG(k); const ik = imgKey(k), r = RESP[ik];
+  if (r && r[1] && r[1].length) return 'img/r/' + ik + '.' + r[0] + '.' + pickW(r[1], kind) + '.webp';
+  return (PHONE.matches && MOBI[ik]) ? 'img/m/' + kind + '/' + ik + '.webp' : IMG(k); };
 const tone = k => MOBI[imgKey(k)] || '';
 const LZ = (k, kind, attrs) => `<img class="lz" data-src="${SRC(k, kind)}" data-orig="${IMG(k)}" data-tone="${tone(k)}" decoding="async" ${attrs || ''}>`;
 // a phone copy that fails to load falls back to the original photo
@@ -4051,16 +4073,27 @@ const lzShown = root => root && $$('img.lz', root).forEach(i => { if (i.getClien
 // load a rail's first photos from the current scroll position to 3 screen-widths ahead, and keep doing so as it scrolls
 function primeRail(r){
   if (!r || r.dataset.primed) return; r.dataset.primed = '1';
-  let t = 0;
-  const run = () => { t = 0; const x0 = r.firstElementChild ? r.firstElementChild.offsetLeft : 0, lim = r.scrollLeft + r.clientWidth * 3;
-    for (const c of r.children) { if (c.offsetLeft - x0 > lim) break; lzLoad($('.cm-track img', c)); } };
-  r.addEventListener('scroll', () => { if (!t) t = requestAnimationFrame(run); }, {passive:true});
-  run();
+  if (!r._run) { let t = 0;   // round 10: wired once; a rail is primed again after its photos were let go (see farIO)
+    r._run = () => { t = 0; const x0 = r.firstElementChild ? r.firstElementChild.offsetLeft : 0, lim = r.scrollLeft + r.clientWidth * 3;
+      for (const c of r.children) { if (c.offsetLeft - x0 > lim) break; lzLoad($('.cm-track img', c)); } };
+    r.addEventListener('scroll', () => { if (!t) t = requestAnimationFrame(r._run); }, {passive:true}); }
+  r._run();
 }
 // start loading about 1.5 screens before something scrolls into view
 const nearIO = new IntersectionObserver(es => es.forEach(e => { if (!e.isIntersecting) return; nearIO.unobserve(e.target);
   const r = e.target.classList.contains('rail') ? e.target : null; r ? primeRail(r) : lzLoad(e.target); }), {rootMargin:'150% 0px 150% 0px'});
-const lzWatch = root => { $$('.rail', root).forEach(r => nearIO.observe(r)); $$('img.lz', root).forEach(i => { if (!i.closest('.rail')) nearIO.observe(i); }); };
+const lzWatch = root => { $$('.rail', root).forEach(r => nearIO.observe(r)); $$('img.lz', root).forEach(i => { if (!i.closest('.rail,.pg-story')) nearIO.observe(i); }); };   // hero scenes load one ahead (wireStory)
+/* round 10: iPhone Safari closes a tab that holds too many decoded photos ("A problem repeatedly occurred").
+   When a page section is more than 3 screens away, its photos are let go (src swapped for a 1px gif);
+   they load again as it comes back near. Popup, drawer, gallery and hero are never touched. */
+const BLANK = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+const farIO = new IntersectionObserver(es => es.forEach(e => { const s = e.target;
+  if (e.isIntersecting) { if (!s.dataset.let) return; delete s.dataset.let;
+    $$('.rail', s).forEach(r => { delete r.dataset.primed; nearIO.observe(r); }); $$('img.lz', s).forEach(i => { if (!i.closest('.rail')) nearIO.observe(i); }); return; }
+  const on = $$('img.lz', s).filter(i => i.dataset.lzOn); if (!on.length) return;
+  on.forEach(i => { delete i.dataset.lzOn; i.classList.remove('in'); i.src = BLANK; }); s.dataset.let = '1';
+}), {rootMargin:'300% 0px 300% 0px'});
+const farWatch = () => $$('#pg-top > section, #sections > section, #pg-bottom > section').forEach(x => farIO.observe(x));
 const CNT = Object.assign({show:true, singular:'vehicle', plural:'vehicles'}, (DATA.settings||{}).sectionCount);
 const countText = (n, s) => { const w = (s && s.countWord) || [CNT.singular, CNT.plural]; return CNT.show ? n + ' ' + (n === 1 ? w[0] : w[1]) : ''; };
 const POP = Object.assign({detailStyle:'sheet', mobileStickyBar:'off'}, (DATA.settings||{}).popup);
@@ -4122,7 +4155,8 @@ const SVC_IC = {
   parts:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8.7 5v10L12 22l-8.7-5V7z"/><circle cx="12" cy="12" r="3.2"/></svg>',
   maintenance:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>'
 };
-const waLink = (v) => 'https://wa.me/' + D.whatsapp + '?text=' + encodeURIComponent(v ? `Hi ${D.name}, I'm interested in the ${v.year || ''} ${v.title} ${v.sub} ${v.stock ? ' (stock ' + v.stock + ')' : ''}${isPOA(v) ? '. Please send me the price.' : ' at ' + R(v.price) + '.'} ${location.href.split('#')[0]}#v-${v.slug}` : `Hi ${D.name}, I have a question.`);
+const cLink = v => PAGES ? `<a class="c-link" href="${esc(carHref(v))}">${esc(v.title)}</a>` : esc(v.title);
+const waLink = (v) => 'https://wa.me/' + D.whatsapp + '?text=' + encodeURIComponent(v ? `Hi ${D.name}, I'm interested in the ${v.year || ''} ${v.title} ${v.sub} ${v.stock ? ' (stock ' + v.stock + ')' : ''}${isPOA(v) ? '. Please send me the price.' : ' at ' + R(v.price) + '.'} ${carHref(v)}` : `Hi ${D.name}, I have a question.`);
 
 /* ---------- optional: header hides on scroll down, reveals on scroll up ---------- */
 (function headerOnScroll(){
@@ -4242,7 +4276,9 @@ if (PG.headerCta) { const b = $('#head-cta'); b.hidden = false; b.textContent = 
 
 /* hero */
 const SCENES = ((PG.hero || {}).scenes || []).filter(s => s && s.image);
-if (SCENES.length) {
+if (CARPAGE) {
+  /* round 10: a car's own page shows the car only; the home page sections aren't built */
+} else if (SCENES.length) {
   const H = PG.hero;
   $('#pg-hero').innerHTML = `<section class="pg-story" style="height:${SCENES.length > 1 ? SCENES.length * 78 + 100 : 100}vh" aria-label="${esc(D.name)}">
     <div class="pg-story-pin">
@@ -4310,7 +4346,7 @@ function brandsHTML(){
         <span class="pg-tile-tx">${x.label ? `<small>${esc(x.label)}</small>` : ''}<b>${esc(v.title)}</b><span>${esc(v.year)} · ${esc(v.sub)}</span><em class="num">${priceText(v)}</em></span>
       </button>`; }).join('')}</div>
   </section>`;
-  $('#pg-top').innerHTML = top;
+  if (!CARPAGE) $('#pg-top').innerHTML = top;
 })();
 
 /* banners: rendered with the sections (see below) */
@@ -4402,7 +4438,7 @@ function featureHTML(v, b, s){
     <div class="pg-visit-form"><h3>Send us a message</h3>${formHTML('contact', null)}</div>
     ${MAPSRC ? `<div class="pg-map">${mapFrame('Map: ' + D.name + ', ' + D.address)}</div>` : ''}
   </section>`;
-  $('#pg-bottom').innerHTML = out;
+  if (!CARPAGE) $('#pg-bottom').innerHTML = out;
 })();
 
 /* footer */
@@ -4431,8 +4467,7 @@ function wireStory(){
   const sc = $$('.pg-story-media .sc', sec), tx = $$('.pg-story-tx .st', sec), dots = $$('.pg-story-nav button', sec), cue = $('.pg-story-cue', sec), n = sc.length;
   const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
   const loadNext = i => { const im = sc[i] && $('img.lz', sc[i]); if (im) lzLoad(im); };
-  addEventListener('load', () => setTimeout(() => sc.forEach((_, i) => loadNext(i)), 600), {once:true});
-  loadNext(1);
+  addEventListener('load', () => loadNext(1), {once:true});   // round 10: was all four scenes after load; now one ahead (show() loads the next)
   let cur = -1;
   const show = i => { if (i === cur) return; cur = i; tx.forEach((t, j) => { t.classList.toggle('on', j === i); t.setAttribute('aria-hidden', j !== i); }); dots.forEach((d, j) => d.classList.toggle('on', j === i)); loadNext(i + 1); };
   if (n < 2) return;
@@ -4596,7 +4631,7 @@ function compactBody(v){
   const price = m != null
     ? `<div class="m num">${R(m, true)}<small>pm</small>${tip1}</div><div class="p num">${R(v.price)} ${tipI}</div>`
     : isPOA(v) ? `<div class="m">On request</div><div class="p">Ask us for the price</div>` : `<div class="m num">${R(v.price)}</div><div class="p">Cash price ${tipI}</div>`;
-  return `<h3 class="c-title">${esc(v.title)}</h3><p class="c-sub">${esc(v.sub)}</p><p class="c-meta">${meta}</p><div class="c-price">${price}</div>`;
+  return `<h3 class="c-title">${cLink(v)}</h3><p class="c-sub">${esc(v.sub)}</p><p class="c-meta">${meta}</p><div class="c-price">${price}</div>`;
 }
 function cardHTML(v, cta, style){
   const imgs = v.images.slice(0, 5);
@@ -4619,7 +4654,7 @@ function cardHTML(v, cta, style){
       <button class="cmp" aria-pressed="false" data-cmp="${v.id}">${ic.cmp}<span>Compare</span></button>
     </div>
     <div class="cb">
-      <h3 class="c-title">${esc(v.title)}</h3>
+      <h3 class="c-title">${cLink(v)}</h3>
       <p class="c-sub">${esc(v.sub)}</p>
       <p class="c-extra">${esc(v.extra || '')}</p>
       <ul class="chips"><li>${esc(v.transmission)}</li><li>${esc(v.fuel)}</li><li>${condLabel(v.condition)}</li></ul>
@@ -4704,7 +4739,7 @@ function wirePromos(){
 }
 
 /* ---------- sections ---------- */
-$('#sections').innerHTML = DATA.sections.map((s, si) => {
+$('#sections').innerHTML = (CARPAGE ? [] : DATA.sections).map((s, si) => {
   const list = s.vehicles.map(id => V[id]).filter(Boolean);
   const bnrs = PG.banners ? PG.banners.filter(b => b.before === s.id) : [];
   const feat = s.layout === 'feature' && list.length ? (bnrs.find(b => b.layout === 'feature') || {}) : null;
@@ -4799,8 +4834,8 @@ document.fonts && document.fonts.ready.then(() => fitStats());
 function wireCard(card){
   const tr = $('.cm-track', card), dots = $$('.cm-dots i', card);
   const more = () => lzAll(tr);   // photos 2-5: touch on the photo, hover, swipe or arrow
-  tr.addEventListener('touchstart', more, {passive:true, once:true}); card.addEventListener('mouseenter', more, {once:true});
-  tr.addEventListener('scroll', more, {passive:true, once:true}); card.addEventListener('focusin', more, {once:true});
+  tr.addEventListener('touchstart', more, {passive:true}); card.addEventListener('mouseenter', more);   // round 10: not once (photos may have been let go)
+  tr.addEventListener('scroll', more, {passive:true}); card.addEventListener('focusin', more);
   const go = d => { const w = tr.clientWidth; tr.scrollTo({left: Math.round(tr.scrollLeft / w + d) * w, behavior: reduce ? 'auto' : 'smooth'}); };
   $('.cm-arrow.prev', card).addEventListener('click', e => { e.stopPropagation(); go(-1); });
   $('.cm-arrow.next', card).addEventListener('click', e => { e.stopPropagation(); go(1); });
@@ -4810,11 +4845,13 @@ function wireCard(card){
     if (style === 'inline') openInline(sec, card.dataset.id);
     else openVehicle(card.dataset.id, false, style === 'sheet' ? 'sheet' : (card.closest('#vp') ? undefined : 'page'));
   };
-  card.addEventListener('click', e => { if (e.target.closest('.tip,.cmp,.cm-arrow')) return; openCard(); });
+  card.addEventListener('click', e => { if (e.target.closest('.tip,.cmp,.cm-arrow')) return;
+    if (e.target.closest('a.c-link')) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); }
+    openCard(); });
   card.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target === card) openCard(); });
 }
 $$('#sections .card').forEach(wireCard);
-lzWatch(document);
+lzWatch(document); farWatch();
 wirePage();
 
 /* ---------- tooltips ---------- */
@@ -4971,20 +5008,33 @@ function openVehicle(id, fromHash, mode){
   if (!$('#vp').classList.contains('on')) openLayer('#vp');
   const sc = $('#vp-scroll'); sc.scrollTop = 0; requestAnimationFrame(() => { sc.scrollTop = 0; });   // reset after unhiding: a hidden scroller ignores scrollTop and keeps the last car's depth
   wireVehicle(v, m);
-  if (!fromHash) try { history.replaceState(null, '', '#v-' + v.slug); } catch(_) {}
-  document.title = v.title + ' ' + v.sub + ' · ' + D.name;
+  if (!fromHash) carURL(v, open);
+  if (!(CARPAGE && fromHash)) document.title = v.title + ' ' + v.sub + ' · ' + D.name;   // round 10: a car page keeps its search title
 }
-function closeVehicle(){
+let vpPushed = false;
+function carURL(v, replace){   // round 10: first car opened adds a history step; moving between cars replaces it
+  try { if (replace || vpPushed || CARPAGE) history.replaceState({car: v.slug}, '', carHref(v));
+        else { history.pushState({car: v.slug}, '', carHref(v)); vpPushed = true; } } catch(_) {}
+}
+function closeVehicle(fromPop){
+  if (CARPAGE) { const s = cur && SEC_OF[cur.id]; location.href = HOME + (s ? '#' + s.id : ''); return; }   // a car page closes to the home page, at the car's section
   closeLayer('#vp'); cur = null;
   setTimeout(() => { const vp = $('#vp'); if (!vp.classList.contains('on')) $('#vp-scroll').scrollTop = 0; }, 300);
   setTimeout(() => { if (!$('#vp').classList.contains('on')) $('#vp-scroll').innerHTML = ''; }, 450);   // frees the closed car's photos
   const s = $('#vp-scrim'); s.classList.remove('on'); setTimeout(() => { s.hidden = true; }, 350);
   setTimeout(() => { const vp = $('#vp'); if (!vp.classList.contains('on')) { vp.classList.remove('sheet'); vp.style.transform = ''; } }, 420);
-  try { history.replaceState(null, '', location.pathname + location.search); } catch(_) {}
+  if (fromPop === true) vpPushed = false;
+  else if (vpPushed) { vpPushed = false; history.back(); }
+  else try { history.replaceState(null, '', PAGES ? HOME : location.pathname + location.search); } catch(_) {}
   document.title = (DATA.meta && DATA.meta.title) || D.name;
 }
-$('#vp-close').onclick = closeVehicle;
-$('#vp-scrim').addEventListener('click', closeVehicle);
+$('#vp-close').onclick = () => closeVehicle();
+$('#vp-scrim').addEventListener('click', () => closeVehicle());
+addEventListener('popstate', e => {   // round 10: Back closes the car; Forward opens it again
+  const st = e.state;
+  if (st && st.car) { const v = DATA.vehicles.find(x => x.slug === st.car); if (v) { openVehicle(v.id, true); vpPushed = true; } }
+  else if (cur) closeVehicle(true);
+});
 (function sheetDrag(){
   const vp = $('#vp'), bar = $('.vp-bar', vp); let y0 = null, dy = 0;
   bar.addEventListener('pointerdown', e => { if (!vp.classList.contains('sheet') || !matchMedia('(max-width:860px)').matches || e.target.closest('button,a')) return; y0 = e.clientY; dy = 0; bar.setPointerCapture(e.pointerId); vp.style.transition = 'none'; });
@@ -4992,7 +5042,7 @@ $('#vp-scrim').addEventListener('click', closeVehicle);
   const end = () => { if (y0 == null) return; y0 = null; vp.style.transition = ''; if (dy > 120) closeVehicle(); else vp.style.transform = ''; };
   bar.addEventListener('pointerup', end); bar.addEventListener('pointercancel', end);
 })();
-$('#vp-back').onclick = () => { const s = cur && SEC_OF[cur.id]; closeVehicle(); if (s) setTimeout(() => document.getElementById(s.id).scrollIntoView({behavior: reduce?'auto':'smooth'}), 60); };
+$('#vp-back').onclick = () => { const s = cur && SEC_OF[cur.id]; closeVehicle(); if (s && !CARPAGE) setTimeout(() => document.getElementById(s.id).scrollIntoView({behavior: reduce?'auto':'smooth'}), 60); };
 $('#vp-share').onclick = async () => {
   const url = location.href;
   try { await navigator.clipboard.writeText(url); $('#vp-share-t').textContent = 'Link copied'; }
@@ -5019,7 +5069,7 @@ function vpHTML(v, m){
       <div class="g-thumbs">${v.images.slice(1,4).map((k,i) => `<button data-lb="${i+1}" aria-label="Open photo ${i+2}">${LZ(k, 'card', 'alt=""')}</button>`).join('')}</div>
     </div>`;
   const galMob = `<div class="g-mob">
-      <div class="ttl"><h1>${esc(v.title)}</h1><p>${esc(v.sub)}</p></div>
+      <div class="ttl"><div class="ttl-h" role="heading" aria-level="1">${esc(v.title)}</div><p>${esc(v.sub)}</p></div>
       <div class="gm-stage">
         <div class="gm-track" id="gm-track">${v.images.map((k,i) => LZ(k, 'gallery', `alt="${esc(v.title)} photo ${i+1}"`)).join('')}</div>
         <button class="gm-arrow prev" aria-label="Previous photo">${ic.l}</button><button class="gm-arrow next" aria-label="Next photo">${ic.r}</button>
@@ -5478,7 +5528,7 @@ function leadPayload(form, type, v){
     fd.append('Condition', {new:'New', demo:'Demo', used:'Pre-owned'}[veh.condition] || veh.condition || '');
     fd.append('Price', priceText(veh).replace(/<[^>]*>/g, ''));
   }
-  fd.append('Page', location.href.split('#')[0] + (veh ? '#v-' + veh.slug : ''));
+  fd.append('Page', veh ? carHref(veh) : HOME);
   fd.append('POPIA consent', 'Yes');
   fd.append('Marketing opt-in', $('[name="marketing"]', form).checked ? 'Yes' : 'No');
   fd.append('_gotcha', ($('[name="_gotcha"]', form) || {}).value || '');
@@ -5558,19 +5608,38 @@ document.addEventListener('keydown', e => { if (stack[stack.length-1] !== '#lb')
 /* ---------- deep links ---------- */
 function fromHash(){
   const h = location.hash.slice(1);
-  if (h.startsWith('v-')) { const v = DATA.vehicles.find(x => x.slug === h.slice(2)); if (v) openVehicle(v.id, true); }
+  if (h.startsWith('v-')) { const v = DATA.vehicles.find(x => x.slug === h.slice(2)); if (v) { openVehicle(v.id, true); if (PAGES) carURL(v, true); } }
 }
 addEventListener('hashchange', fromHash);
-fromHash();
+if (CARPAGE) { const v = DATA.vehicles.find(x => x.slug === CARPAGE); const st = document.getElementById('car-static'); if (st) st.remove();
+  if (v) openVehicle(v.id, true, 'page'); }
+else fromHash();
 
 /* ---------- structured data for search & AI ---------- */
-const ld = { "@context":"https://schema.org", "@type":"AutoDealer", "name":D.name, "telephone":D.phone, "address":D.address,
-  "makesOffer": DATA.vehicles.map(v => ({ "@type":"Offer", ...(isPOA(v) ? {} : {"price":v.price}), "priceCurrency":"ZAR", "availability":"https://schema.org/InStock",
-    "url": "#v-" + v.slug,
-    "itemOffered": { "@type":"Car", "name":v.title + ' ' + v.sub, "brand":{"@type":"Brand","name":content(v).make || v.title.split(' ').find(w => !/^\d+$/.test(w))}, "vehicleModelDate":String(v.year),
-      "itemCondition": v.condition === 'used' ? "https://schema.org/UsedCondition" : "https://schema.org/NewCondition",
-      "mileageFromOdometer": {"@type":"QuantitativeValue","value":v.km||0,"unitCode":"KMT"}, "color":v.colour, "vehicleTransmission":v.transmission, "fuelType":v.fuel, "sku":v.stock, "image":IMG(v.images[0]) } })) };
-const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+if (!CARPAGE) {   // round 10: a car page carries its own Car data (added by the build); the home page lists the dealer and its cars
+  const CANON = (document.querySelector('link[rel="canonical"]') || {}).href || HOME;
+  const ABS = u => new URL(u, PAGES ? CANON : document.baseURI).href, LDHOME = PAGES ? CANON : HOME;
+  const ap = String(D.address || '').split(',').map(x => x.trim()).filter(Boolean), pc = ap.length > 1 && /^\d{4}$/.test(ap[ap.length - 1]) ? ap.pop() : '';
+  const geo = /!2d(-?[\d.]+)!3d(-?[\d.]+)/.exec(D.mapEmbed || '');
+  const DAYS = {monday:'Monday', tuesday:'Tuesday', wednesday:'Wednesday', thursday:'Thursday', friday:'Friday', saturday:'Saturday', sunday:'Sunday'}, ORDER = Object.values(DAYS);
+  const hours = (D.hours || []).map(([d, t]) => { const ds = String(d).toLowerCase().match(/[a-z]+/g) || [], tm = String(t).match(/\d{1,2}:\d{2}/g) || [];
+    const names = ds.map(x => DAYS[x]).filter(Boolean); if (!names.length || tm.length < 2) return null;
+    const days = names.length === 2 && /–|-|to/.test(d) ? ORDER.slice(ORDER.indexOf(names[0]), ORDER.indexOf(names[1]) + 1) : names;
+    return {"@type":"OpeningHoursSpecification", "dayOfWeek":days, "opens":tm[0].padStart(5, '0'), "closes":tm[1].padStart(5, '0')}; }).filter(Boolean);
+  const ld = { "@context":"https://schema.org", "@type":"AutoDealer", "name":D.name, "url":LDHOME, "telephone":D.phone, ...(D.email ? {"email":D.email} : {}),
+    ...(D.logo ? {"logo":ABS(IMG(D.logo)), "image":ABS(IMG(D.logo))} : {}),
+    "address": {"@type":"PostalAddress", "streetAddress":ap[0] || D.address, ...(ap.length > 1 ? {"addressLocality":ap[ap.length - 1]} : {}), ...(pc ? {"postalCode":pc} : {}), "addressCountry":"ZA"},
+    ...(geo ? {"geo":{"@type":"GeoCoordinates", "latitude":+geo[2], "longitude":+geo[1]}} : {}),
+    ...(hours.length ? {"openingHoursSpecification":hours} : {}),
+    ...((D.social || []).length ? {"sameAs":D.social.map(x => x[1])} : {}),
+    "makesOffer": DATA.vehicles.filter(v => SEC_OF[v.id]).map(v => ({ "@type":"Offer", ...(isPOA(v) ? {} : {"price":v.price}), "priceCurrency":"ZAR", "availability":"https://schema.org/InStock",
+      "url": PAGES ? ABS('cars/' + v.slug + '/') : carHref(v),
+      "itemOffered": { "@type":"Car", "name":`${v.year} ${v.title} ${v.sub}`.replace(/^(\d{4}) \1 /, '$1 '), "brand":{"@type":"Brand","name":content(v).make || v.make || v.title.split(' ').find(w => !/^\d+$/.test(w))}, "vehicleModelDate":String(v.year),
+        "itemCondition": v.condition === 'new' ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
+        ...(v.condition !== 'new' && typeof v.km === 'number' ? {"mileageFromOdometer": {"@type":"QuantitativeValue","value":v.km,"unitCode":"KMT"}} : {}),
+        ...(v.colour ? {"color":v.colour} : {}), "vehicleTransmission":v.transmission, "fuelType":v.fuel, ...(v.stock ? {"sku":String(v.stock)} : {}), "image":ABS(IMG(v.images[0])) } })) };
+  const s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
+}
 
 syncCmp();
 

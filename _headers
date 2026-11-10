@@ -1,16 +1,33 @@
-# Cloudflare Pages headers (zhaiauto_live)
-# Keep the pages.dev address out of Google; the real site is zhaiauto.co.za.
+# Cloudflare Pages headers (zhaiauto_live). Master copy: website/_headers-live on the Drive. Copied into dist/ by the build.
+
+# Keep the pages.dev addresses (main and branch previews) out of Google; the real site is zhaiauto.co.za.
 https://zhaiauto-live.pages.dev/*
   X-Robots-Tag: noindex
+https://:branch.zhaiauto-live.pages.dev/*
+  X-Robots-Tag: noindex
 
-# Car photos and site images: cache 30 days (new cars get new file names).
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
+
+# Original photos, logos, fonts, share images: 7 days (their names don't change when the file does).
 /img/*
-  Cache-Control: public, max-age=2592000
+  Cache-Control: public, max-age=604800
 
-# The page itself: always check for a fresh copy, so stock changes show at once.
+# Build copies (img/r): the name has a content hash, so a changed photo always gets a new name. Cache for a year.
+/img/r/*
+  ! Cache-Control
+  Cache-Control: public, max-age=31536000, immutable
+
+# Pages: always check for a fresh copy, so stock changes show at once.
 /
   Cache-Control: public, max-age=0, must-revalidate
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
+/cars/*
+  Cache-Control: public, max-age=0, must-revalidate
 /privacy.html
   Cache-Control: public, max-age=0, must-revalidate
+/sitemap.xml
+  Cache-Control: public, max-age=3600
