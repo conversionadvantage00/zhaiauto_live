@@ -8,26 +8,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Zhai Auto George | Peugeot, Citroën, Opel, Jeep &amp; Fiat</title>
-<meta name="description" content="New Peugeot, Citroën, Opel, Jeep and Fiat cars, current specials, service, parts and finance at Zhai Auto, 78 York Street, George.">
+<meta name="description" content="New, demo and pre-owned Peugeot, Citroën, Opel, Jeep and Fiat cars in George. Specials, finance, service and parts at Zhai Auto, 78 York Street.">
 <meta name="theme-color" content="#f4f4f2">
 <link rel="icon" href="img/meta/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="img/meta/favicon-32.png">
 <link rel="apple-touch-icon" href="img/meta/apple-touch-icon.png">
-<link rel="canonical" href="https://zhaiauto-live.pages.dev/">
+<link rel="canonical" href="https://zhaiauto.co.za/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Zhai Auto">
 <meta property="og:title" content="Zhai Auto George | Peugeot, Citroën, Opel, Jeep &amp; Fiat">
-<meta property="og:description" content="New Peugeot, Citroën, Opel, Jeep and Fiat cars, current specials, service, parts and finance at Zhai Auto, 78 York Street, George.">
-<meta property="og:url" content="https://zhaiauto-live.pages.dev/">
-<meta property="og:image" content="https://zhaiauto-live.pages.dev/img/meta/social.jpg">
+<meta property="og:description" content="New, demo and pre-owned Peugeot, Citroën, Opel, Jeep and Fiat cars in George. Specials, finance, service and parts at Zhai Auto, 78 York Street.">
+<meta property="og:url" content="https://zhaiauto.co.za/">
+<meta property="og:image" content="https://zhaiauto.co.za/img/meta/social.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Peugeot Landtrek bakkies with the Zhai Auto logo and the Peugeot, Citroën, Opel, Jeep and Fiat logos">
 <meta property="og:locale" content="en_ZA">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Zhai Auto George | Peugeot, Citroën, Opel, Jeep &amp; Fiat">
-<meta name="twitter:description" content="New Peugeot, Citroën, Opel, Jeep and Fiat cars, current specials, service, parts and finance at Zhai Auto, 78 York Street, George.">
-<meta name="twitter:image" content="https://zhaiauto-live.pages.dev/img/meta/social.jpg">
+<meta name="twitter:description" content="New, demo and pre-owned Peugeot, Citroën, Opel, Jeep and Fiat cars in George. Specials, finance, service and parts at Zhai Auto, 78 York Street.">
+<meta name="twitter:image" content="https://zhaiauto.co.za/img/meta/social.jpg">
 <link rel="preload" href="img/fonts/hanken-grotesk-var.woff2" as="font" type="font/woff2" crossorigin="">
 </head><body>
 <!-- Google Tag Manager (noscript) -->
@@ -1569,8 +1569,8 @@ main{padding-block:0 64px}
     "note": "",
     "label": "",
     "showChecks": false,
-    "description": "New Peugeot, Citroën, Opel, Jeep and Fiat cars, current specials, service, parts and finance at Zhai Auto, 78 York Street, George.",
-    "url": "https://zhaiauto-live.pages.dev/",
+    "description": "New, demo and pre-owned Peugeot, Citroën, Opel, Jeep and Fiat cars in George. Specials, finance, service and parts at Zhai Auto, 78 York Street.",
+    "url": "https://zhaiauto.co.za/",
     "shareImage": "meta/social"
   },
   "theme": {
@@ -5660,7 +5660,7 @@ if (CARPAGE) { const v = DATA.vehicles.find(x => x.slug === CARPAGE); const st =
 else fromHash();
 
 /* ---------- structured data for search & AI ---------- */
-if (!CARPAGE) {   // round 10: a car page carries its own Car data (added by the build); the home page lists the dealer and its cars
+if (!CARPAGE && !document.querySelector('script[type="application/ld+json"]')) {   // the build writes this data into the page itself; this is the fallback for unbuilt copies (staging, editor). round 10: a car page carries its own Car data (added by the build); the home page lists the dealer and its cars
   const CANON = (document.querySelector('link[rel="canonical"]') || {}).href || HOME;
   const ABS = u => new URL(u, PAGES ? CANON : document.baseURI).href, LDHOME = PAGES ? CANON : HOME;
   const ap = String(D.address || '').split(',').map(x => x.trim()).filter(Boolean), pc = ap.length > 1 && /^\d{4}$/.test(ap[ap.length - 1]) ? ap.pop() : '';

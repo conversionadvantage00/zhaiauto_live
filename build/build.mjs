@@ -8,6 +8,8 @@
 //   - index.html     the export + <base>, the image list (window.__CA_RESP) and the main address in canonical/share tags
 //   - cars/<slug>/   one page per car on the site: own title, description, share image, Car data for Google and a
 //                    plain-HTML summary; the same site code then opens the car full screen
+//   - index.html also gets (12 Nov 2026) the dealer + stock data for Google/AI written into the page (JSON-LD) and a plain-HTML
+//                    summary of the dealer and every car, which the page removes as it loads; llms.txt = the same as plain text
 //   - sitemap.xml, robots.txt, 404.html, _headers, privacy.html and the original img/ files (fallbacks, share images)
 // Run locally: npm install && SITE_URL=https://zhaiauto.co.za/ npm run build  (then serve dist/)
 import fs from 'node:fs';
@@ -104,12 +106,80 @@ function setHead(html, {base, title, desc, url, image, imageW, imageH, imageAlt,
 const shareImg = DATA.meta && DATA.meta.shareImage ? IMGURL(DATA.meta.shareImage) : SITE + 'img/meta/social.jpg';
 
 // ---------- home page ----------
-const home = setHead(HOME_HTML, {
-  base: './', title: (DATA.meta && DATA.meta.title) || D.name, desc: (DATA.meta && DATA.meta.description) || '',
+const KM = n => n.toLocaleString('en-ZA').replace(/[,\u00a0\u202f]/g, ' ') + ' km';
+const priceOf = v => v.priceMode === 'poa' || !v.price ? 'Price on request' : R(v.price);
+const carLine = v => [COND[v.condition] || '', priceOf(v), v.monthlyFixed ? `from ${R(v.monthlyFixed)} pm*` : '', v.condition !== 'new' && typeof v.km === 'number' ? KM(v.km) : '', v.transmission, v.fuel].filter(Boolean).join(', ');
+const HOURS = Array.isArray(D.hours) ? D.hours.filter(h => h && h[0]) : [];
+const DEPTS = Array.isArray(D.departments) ? D.departments.filter(x => x && x.name) : [];
+const SECS = (DATA.sections || []).map(s => ({s, list: (s.vehicles || []).map(id => DATA.vehicles.find(v => v.id === id)).filter(Boolean)})).filter(x => x.list.length);
+const ABOUT = ((DATA.page || {}).about || {}), SVC = ((DATA.page || {}).services || {});
+const HOME_DESC = (DATA.meta && DATA.meta.description) || '';
+
+// dealer + stock data for search engines and AI assistants, written into the page (crawlers that don't run scripts read it too)
+const homeLD = (() => {
+  const ap = String(D.address || '').split(',').map(x => x.trim()).filter(Boolean), pc = ap.length > 1 && /^\d{4}$/.test(ap[ap.length - 1]) ? ap.pop() : '';
+  const geo = /!2d(-?[\d.]+)!3d(-?[\d.]+)/.exec(D.mapEmbed || '');
+  const DAYS = {monday: 'Monday', tuesday: 'Tuesday', wednesday: 'Wednesday', thursday: 'Thursday', friday: 'Friday', saturday: 'Saturday', sunday: 'Sunday'}, ORDER = Object.values(DAYS);
+  const hours = HOURS.map(([d, t]) => { const ds = String(d).toLowerCase().match(/[a-z]+/g) || [], tm = String(t).match(/\d{1,2}:\d{2}/g) || [];
+    const names = ds.map(x => DAYS[x]).filter(Boolean); if (!names.length || tm.length < 2) return null;
+    const days = names.length === 2 && /–|-|to/.test(d) ? ORDER.slice(ORDER.indexOf(names[0]), ORDER.indexOf(names[1]) + 1) : names;
+    return {'@type': 'OpeningHoursSpecification', dayOfWeek: days, opens: tm[0].padStart(5, '0'), closes: tm[1].padStart(5, '0')}; }).filter(Boolean);
+  return {'@context': 'https://schema.org', '@type': 'AutoDealer', name: D.name, url: SITE, telephone: D.phone, ...(D.email ? {email: D.email} : {}),
+    ...(HOME_DESC ? {description: HOME_DESC} : {}),
+    ...(D.logo ? {logo: IMGURL(D.logo), image: IMGURL(D.logo)} : {}),
+    address: {'@type': 'PostalAddress', streetAddress: ap[0] || D.address, ...(ap.length > 1 ? {addressLocality: ap[ap.length - 1]} : {}), ...(pc ? {postalCode: pc} : {}), addressCountry: 'ZA'},
+    ...(geo ? {geo: {'@type': 'GeoCoordinates', latitude: +geo[2], longitude: +geo[1]}} : {}),
+    ...(hours.length ? {openingHoursSpecification: hours} : {}),
+    ...(Array.isArray(D.social) && D.social.length ? {sameAs: D.social.map(x => x[1])} : {}),
+    makesOffer: onSite.map(v => ({'@type': 'Offer', ...(v.price && v.priceMode !== 'poa' ? {price: v.price} : {}), priceCurrency: 'ZAR', availability: 'https://schema.org/InStock',
+      url: `${SITE}cars/${v.slug}/`,
+      itemOffered: {'@type': 'Car', name: nameOf(v), brand: {'@type': 'Brand', name: v.make || String(v.title).replace(/^\d{4}\s+/, '').split(' ')[0]}, vehicleModelDate: String(v.year),
+        itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
+        ...(v.condition !== 'new' && typeof v.km === 'number' ? {mileageFromOdometer: {'@type': 'QuantitativeValue', value: v.km, unitCode: 'KMT'}} : {}),
+        ...(v.images && v.images[0] ? {image: IMGURL(v.images[0])} : {})}}))};
+})();
+
+// plain summary of the dealer and every car: for search engines, AI assistants and anyone without JavaScript.
+// The one-line script right after it removes it before the page is drawn, so visitors only ever see the full site.
+const homeStatic = `<div id="home-static" style="max-width:960px;margin:24px auto;padding:0 16px">
+  <h1>${esc(D.name)}: ${esc(ABOUT.title || (DATA.meta && DATA.meta.title) || '')}</h1>
+  ${HOME_DESC ? `<p>${esc(HOME_DESC)}</p>` : ''}${ABOUT.text ? `<p>${esc(ABOUT.text)}</p>` : ''}
+  <h2>Contact and opening hours</h2>
+  <p>${esc(D.address)}. Phone <a href="tel:${esc(String(D.phone).replace(/\s/g, ''))}">${esc(D.phone)}</a>${D.whatsapp ? `, <a href="https://wa.me/${esc(D.whatsapp)}">WhatsApp ${esc(D.mobile || '')}</a>` : ''}${D.email ? `, ${esc(D.email)}` : ''}.</p>
+  ${HOURS.length ? `<ul>${HOURS.map(h => `<li>${esc(h[0])}: ${esc(h[1] || '')}</li>`).join('')}</ul>` : ''}
+  ${DEPTS.length ? `<ul>${DEPTS.map(x => `<li>${esc(x.name)}: ${esc(x.phone || D.phone)}${x.email ? `, ${esc(x.email)}` : ''}</li>`).join('')}</ul>` : ''}
+  ${SECS.map(({s, list}) => `<h2 id="s-${esc(s.id)}">${esc(s.title || s.label || s.id)}</h2>${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
+  <ul>${list.map(v => `<li><a href="cars/${esc(v.slug)}/">${esc(nameOf(v))}</a>: ${esc(carLine(v))}</li>`).join('')}</ul>`).join('\n  ')}
+  ${Array.isArray(SVC.items) && SVC.items.length ? `<h2>${esc(SVC.title || 'Service and parts')}</h2><ul>${SVC.items.map(x => `<li>${esc(x.title)}: ${esc(x.text || '')}</li>`).join('')}</ul>` : ''}
+  <p><small>*Monthly figures are estimates. ${esc(D.priceNote || '')}</small></p>
+  <p><a href="privacy.html">Privacy notice</a></p>
+</div><script>(function(){var e=document.getElementById('home-static');if(e)e.remove()})()</script>`;
+
+let home = setHead(HOME_HTML, {
+  base: './', title: (DATA.meta && DATA.meta.title) || D.name, desc: HOME_DESC,
   url: SITE, image: shareImg,
-  extra: `<script>window.__CA_PAGES=1;window.__CA_RESP=${RESP_JSON}</script>\n`,
+  extra: `<script>window.__CA_PAGES=1;window.__CA_RESP=${RESP_JSON}</script>\n<script type="application/ld+json">${JSON.stringify(homeLD).replace(/</g, '\\u003c')}</script>\n`,
 });
+home = once(home, '<main id="top">', `<main id="top">\n${homeStatic}`, 'main (home)');
 fs.writeFileSync(path.join(OUT, 'index.html'), home);
+
+// ---------- llms.txt: the same facts as plain text for AI assistants (llmstxt.org layout) ----------
+fs.writeFileSync(path.join(OUT, 'llms.txt'), [
+  `# ${D.name}`, '',
+  `> ${HOME_DESC}`, '',
+  ABOUT.text || '', '',
+  '## Contact', '',
+  `- Address: ${D.address}`, `- Phone: ${D.phone}`, ...(D.mobile ? [`- WhatsApp: ${D.mobile}`] : []), ...(D.email ? [`- Email: ${D.email}`] : []),
+  `- Website: ${SITE}`, ...DEPTS.map(x => `- ${x.name}: ${x.phone || D.phone}${x.email ? ', ' + x.email : ''}`), '',
+  ...(HOURS.length ? ['## Opening hours', '', ...HOURS.map(h => `- ${h[0]}: ${h[1] || ''}`), ''] : []),
+  ...SECS.flatMap(({s, list}) => [`## ${s.title || s.label || s.id}`, '', ...(s.intro ? [s.intro, ''] : []), ...list.map(v => `- [${nameOf(v)}](${SITE}cars/${v.slug}/): ${carLine(v)}${v.stock ? `, stock no. ${v.stock}` : ''}`), '']),
+  ...(Array.isArray(SVC.items) && SVC.items.length ? [`## ${SVC.title || 'Service and parts'}`, '', ...SVC.items.map(x => `- ${x.title}: ${x.text || ''}`), ''] : []),
+  '## Notes', '',
+  `- Stock and prices as published on ${new Date().toISOString().slice(0, 10)}; this file is rebuilt with every site update. Cars not listed here have been sold.`,
+  `- *Monthly figures are estimates. ${D.priceNote || ''}`,
+  `- Enquiries, test drives, finance applications, trade-in valuations, service bookings and parts requests can be made on the website.`,
+  `- [Privacy notice](${SITE}privacy.html)`, '',
+].join('\n').replace(/\n{3,}/g, '\n\n'));
 
 // ---------- one page per car ----------
 for (const v of onSite) {
