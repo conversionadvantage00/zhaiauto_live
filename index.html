@@ -1620,7 +1620,12 @@ main{padding-block:0 64px}
     },
     "tracking": {
       "_help": "Google Tag Manager container ID. The same ID must also be in the GTM snippet in <head> and in privacy.html. dataLayer events: see TRACKING-PLAN.md.",
-      "gtmId": "GTM-W35G996R"
+      "gtmId": "GTM-W35G996R",
+      "metaPixelId": "2200976354120255",
+      "metaPixelHosts": [
+        "zhaiauto.co.za",
+        "www.zhaiauto.co.za"
+      ]
     }
   },
   "dealer": {
@@ -5955,7 +5960,22 @@ function openFormDrawer(type, v){
 }
 
 /* ---------- tracking (dataLayer for GTM; no personal details are ever pushed) ---------- */
-const track = (event, params) => { try { (window.dataLayer = window.dataLayer || []).push(Object.assign({event}, params || {})); } catch(_) {} };
+/* Meta Pixel (17 Nov 2026): built in, so do NOT also add it in GTM. Loads only on the hosts in settings.tracking.metaPixelHosts
+   (the live site), never on staging or local files. PageView on load; ViewContent when a car opens; Lead when a form is sent;
+   Contact on a phone or WhatsApp tap. No names, emails or phone numbers are sent. */
+const PIXEL = (() => { const t = (DATA.settings || {}).tracking || {}, id = String(t.metaPixelId || '');
+  return /^\d{8,20}$/.test(id) && (t.metaPixelHosts || []).includes(location.hostname) ? id : ''; })();
+if (PIXEL) { try {
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+  s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', PIXEL); fbq('track', 'PageView'); } catch(_) {} }
+const pixelTrack = (event, p) => { if (!PIXEL || !window.fbq) return; try {
+  if (event === 'vehicle_view') fbq('track', 'ViewContent', {content_ids: [p.stock || p.vehicle], content_type: 'vehicle', content_name: p.vehicle_name, content_category: p.condition, value: p.price || 0, currency: 'ZAR'});
+  else if (event === 'lead_success') fbq('track', 'Lead', {content_name: p.vehicle_name || p.form_type, content_category: p.lead_group});
+  else if (event === 'click_call' || event === 'click_whatsapp') fbq('track', 'Contact', {content_category: event === 'click_call' ? 'call' : 'whatsapp', content_name: p.click_location || ''});
+} catch(_) {} };
+const track = (event, params) => { try { (window.dataLayer = window.dataLayer || []).push(Object.assign({event}, params || {})); } catch(_) {} pixelTrack(event, params || {}); };
 const trkVeh = v => v ? {vehicle: v.slug, vehicle_name: `${v.year && !String(v.title).startsWith(String(v.year)) ? v.year + ' ' : ''}${v.title} ${v.sub}`.replace(/\s+/g, ' ').trim(), vehicle_make: v.make || '', stock: v.stock || '', condition: v.condition || '', price: v.price || 0, section: (SEC_OF[v.id] || {}).id || ''} : {};
 const trkLoc = el => el.closest('#vp') ? 'vehicle_popup' : el.closest('.inl') ? 'vehicle_inline' : el.closest('#drawer') ? 'drawer' : el.closest('#mnav') ? 'mobile_menu' : el.closest('.site-head') ? 'header' : el.closest('.foot') ? 'footer' : el.closest('.fab-wa, .fab-enq') ? 'floating_button' : el.closest('.pg-hero, .pg-story') ? 'hero' : ((el.closest('section[id]') || {}).id || 'page');
 const trkOnce = new Set();
