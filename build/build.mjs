@@ -107,7 +107,9 @@ const shareImg = DATA.meta && DATA.meta.shareImage ? IMGURL(DATA.meta.shareImage
 
 // ---------- home page ----------
 const KM = n => n.toLocaleString('en-ZA').replace(/[,\u00a0\u202f]/g, ' ') + ' km';
-const priceOf = v => v.priceMode === 'poa' || !v.price ? 'Price on request' : R(v.price);
+// Dec 2026: a price carries the car's own label (v.priceNote, e.g. "excl. VAT"); a fixed offer with no confirmed price shows its instalment only
+const priceOf = v => v.priceMode === 'poa' ? 'Price on request' : v.price ? R(v.price) + (v.priceNote ? ' ' + v.priceNote : '') : v.monthlyFixed ? '' : 'Price on request';
+const vatSpec = v => /excl/i.test(v.priceNote || '') ? {priceSpecification: {'@type': 'UnitPriceSpecification', price: v.price, priceCurrency: 'ZAR', valueAddedTaxIncluded: false}} : {};
 const carLine = v => [COND[v.condition] || '', priceOf(v), v.monthlyFixed ? `from ${R(v.monthlyFixed)} pm*` : '', v.condition !== 'new' && typeof v.km === 'number' ? KM(v.km) : '', v.transmission, v.fuel].filter(Boolean).join(', ');
 const HOURS = Array.isArray(D.hours) ? D.hours.filter(h => h && h[0]) : [];
 const DEPTS = Array.isArray(D.departments) ? D.departments.filter(x => x && x.name) : [];
@@ -131,7 +133,7 @@ const homeLD = (() => {
     ...(geo ? {geo: {'@type': 'GeoCoordinates', latitude: +geo[2], longitude: +geo[1]}} : {}),
     ...(hours.length ? {openingHoursSpecification: hours} : {}),
     ...(Array.isArray(D.social) && D.social.length ? {sameAs: D.social.map(x => x[1])} : {}),
-    makesOffer: onSite.map(v => ({'@type': 'Offer', ...(v.price && v.priceMode !== 'poa' ? {price: v.price} : {}), priceCurrency: 'ZAR', availability: 'https://schema.org/InStock',
+    makesOffer: onSite.map(v => ({'@type': 'Offer', ...(v.price && v.priceMode !== 'poa' ? {price: v.price, ...vatSpec(v)} : {}), priceCurrency: 'ZAR', availability: 'https://schema.org/InStock',
       url: `${SITE}cars/${v.slug}/`,
       itemOffered: {'@type': 'Car', name: nameOf(v), brand: {'@type': 'Brand', name: v.make || String(v.title).replace(/^\d{4}\s+/, '').split(' ')[0]}, vehicleModelDate: String(v.year),
         itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
@@ -185,10 +187,10 @@ fs.writeFileSync(path.join(OUT, 'llms.txt'), [
 for (const v of onSite) {
   const name = nameOf(v), cond = COND[v.condition] || '';
   const monthly = v.monthlyFixed ? `${R(v.monthlyFixed)} pm` : '';
-  const price = v.priceMode === 'poa' || !v.price ? 'Price on request' : R(v.price);
+  const price = priceOf(v);
   const facts = [v.condition !== 'new' && typeof v.km === 'number' ? `${v.km.toLocaleString('en-ZA').replace(/[,\u00a0\u202f]/g, ' ')} km` : '', v.transmission, v.fuel, v.colour].filter(Boolean);
   const title = `${cond === 'New' ? 'New' : cond} ${name} for sale in ${TOWN} | ${D.name}`.replace(/^ +/, '');
-  const desc = `${cond} ${name} at ${D.name}, ${TOWN}: ${price}${monthly ? ', from ' + monthly : ''}. ${facts.join(', ')}. Enquire, book a test drive or apply for finance online.`.replace(/\s+/g, ' ').trim();
+  const desc = `${cond} ${name} at ${D.name}, ${TOWN}: ${[price, monthly ? 'from ' + monthly : ''].filter(Boolean).join(', ')}. ${facts.join(', ')}. Enquire, book a test drive or apply for finance online.`.replace(/\s+/g, ' ').trim();
   const url = `${SITE}cars/${v.slug}/`;
   const img0 = v.images && v.images[0];
   let w = 1200, h = 800; try { const m = await sharp(path.join(ROOT, 'img', fileOf(img0))).metadata(); w = m.width; h = m.height; } catch (_) {}
@@ -198,7 +200,7 @@ for (const v of onSite) {
     vehicleModelDate: String(v.year), itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
     ...(v.condition !== 'new' && typeof v.km === 'number' ? {mileageFromOdometer: {'@type': 'QuantitativeValue', value: v.km, unitCode: 'KMT'}} : {}),
     ...(v.colour ? {color: v.colour} : {}), vehicleTransmission: v.transmission, fuelType: v.fuel, ...(v.stock ? {sku: String(v.stock)} : {}),
-    offers: {'@type': 'Offer', url, priceCurrency: 'ZAR', ...(v.price && v.priceMode !== 'poa' ? {price: v.price} : {}), availability: 'https://schema.org/InStock',
+    offers: {'@type': 'Offer', url, priceCurrency: 'ZAR', ...(v.price && v.priceMode !== 'poa' ? {price: v.price, ...vatSpec(v)} : {}), availability: 'https://schema.org/InStock',
       seller: {'@type': 'AutoDealer', name: D.name, telephone: D.phone, address: D.address, url: SITE}},
   };
   const extra = `<script>window.__CA_PAGES=1;window.__CA_CARPAGE=${JSON.stringify(v.slug)};window.__CA_RESP=${RESP_JSON}</script>\n` +
@@ -209,7 +211,7 @@ for (const v of onSite) {
   const stat = `<div id="car-static" style="max-width:960px;margin:24px auto;padding:0 16px">
   <p><a href="./">${esc(D.name)}</a> › <a href="./#${esc((SEC_OF[v.id] || {}).id || '')}">${esc((SEC_OF[v.id] || {}).label || (SEC_OF[v.id] || {}).title || 'Vehicles')}</a></p>
   <h1>${esc(name)}</h1>
-  <p><b>${esc(price)}</b>${monthly ? ` · from ${esc(monthly)}*` : ''} · ${esc(cond)}${v.stock ? ` · Stock no. ${esc(v.stock)}` : ''}</p>
+  <p><b>${esc(price || 'from ' + monthly + '*')}</b>${price && monthly ? ` · from ${esc(monthly)}*` : ''} · ${esc(cond)}${v.stock ? ` · Stock no. ${esc(v.stock)}` : ''}</p>
   <img src="${esc(respURL(img0, 800))}" alt="${esc(name)}" width="800" height="${Math.round(800 * h / w)}" style="max-width:100%;height:auto">
   <ul>${[['Year', v.year], ['Mileage', facts[0] && /km$/.test(facts[0]) ? facts[0] : ''], ['Transmission', v.transmission], ['Fuel', v.fuel], ['Engine', v.engine], ['Colour', v.colour], ['Seats', v.seats]].filter(x => x[1]).map(x => `<li>${esc(x[0])}: ${esc(x[1])}</li>`).join('')}</ul>
   ${v.dealerNotes ? `<p>${esc(v.dealerNotes)}</p>` : ''}${equip.length ? `<h2>Equipment</h2><ul>${equip.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}

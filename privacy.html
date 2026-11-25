@@ -2,13 +2,57 @@
 <html lang="en-ZA">
 <head>
 <meta charset="utf-8">
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W35G996R');</script>
-<!-- End Google Tag Manager -->
+<!-- cookie consent (consent-banner-kit v1.0): must stay the first thing in <head>. Sets consent to "denied", then loads Tag Manager itself, so Google's own GTM snippet must NOT be added. -->
+<script data-consent="config">
+window.cookieConsentConfig = {
+  gtmId: 'GTM-W35G996R',                   // the site's Tag Manager container. '' = this code does not load Tag Manager
+  liveHosts: ['zhaiauto.co.za'],          // Tag Manager loads only on these addresses (www. is included). [] = load everywhere
+  privacyUrl: 'privacy.html',              // where "privacy policy" in the banner goes. '' = no link
+  position: 'left',                        // 'left', 'right' or 'center' (phones always get a full-width card at the bottom)
+  days: 180,                               // how long a choice is remembered before the banner asks again
+  storageKey: 'cookie-consent',            // name the choice is saved under in the visitor's browser
+  eventName: 'cookie_consent_update',      // dataLayer event sent when a choice is made (for a Tag Manager trigger)
+  delay: 1200,                             // milliseconds before the banner appears on a first visit
+  text: {}                                 // optional wording changes, see README ("changing the wording")
+};
+</script>
+<script data-consent="core">
+/* cookie consent core, v1.0. Sets Google Consent Mode v2 to "denied" before anything else runs, re-applies a saved choice, then loads Tag Manager. */
+(function (w, d) {
+  var cfg = w.cookieConsentConfig || {}, KEY = cfg.storageKey || 'cookie-consent', LIFE = (cfg.days || 180) * 864e5,
+      EVT = cfg.eventName || 'cookie_consent_update', g = function (b) { return b ? 'granted' : 'denied'; };
+  w.dataLayer = w.dataLayer || [];
+  function gtag() { w.dataLayer.push(arguments); }
+  w.gtag = w.gtag || gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    personalization_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted', wait_for_update: 500 });
+  gtag('set', 'ads_data_redaction', true);
+  function send(c) { gtag('consent', 'update', { analytics_storage: g(c.a), ad_storage: g(c.m), ad_user_data: g(c.m), ad_personalization: g(c.m) }); }
+  var c = null;
+  try { c = JSON.parse(localStorage.getItem(KEY)); if (!c || c.v !== 1 || !(Date.now() - c.t < LIFE)) c = null; } catch (e) { c = null; }
+  if (c) send(c);
+  w.cookieConsent = {
+    config: cfg,
+    get: function () { return c; },
+    set: function (a, m) {
+      c = { v: 1, a: a ? 1 : 0, m: m ? 1 : 0, t: Date.now() };
+      try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+      send(c);
+      w.dataLayer.push({ event: EVT, consent_analytics: g(c.a), consent_marketing: g(c.m) });
+      return c;
+    }
+  };
+  w.dataLayer.push({ consent_analytics: g(c && c.a), consent_marketing: g(c && c.m), consent_chosen: !!c });
+  var id = /^GTM-[A-Z0-9]+$/.test(cfg.gtmId || '') ? cfg.gtmId : '', hosts = cfg.liveHosts || [], host = location.hostname.replace(/^www\./, ''), live = !hosts.length;
+  for (var i = 0; i < hosts.length; i++) if (String(hosts[i]).replace(/^www\./, '') === host) live = true;
+  if (id && (live || /[?&]gtm_debug=/.test(location.search))) {
+    w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName('script')[0], j = d.createElement('script');
+    j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + id; f.parentNode.insertBefore(j, f);
+  }
+})(window, document);
+</script>
+<!-- end cookie consent -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy notice | Zhai Auto George</title>
 <meta name="description" content="How Zhai Auto collects, uses and protects your personal information, in line with the Protection of Personal Information Act (POPIA).">
@@ -42,17 +86,15 @@ dd{margin:0}
 a{color:var(--ink);text-underline-offset:3px}
 footer{color:var(--muted);font-size:13px;text-align:center;padding:0 20px 40px}
 @media (max-width:560px){section{padding:18px}dl{grid-template-columns:1fr}dt{margin-top:6px}}
+.foot-cc{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+html .cc{--cc-font:"Hanken Grotesk",system-ui,sans-serif;--cc-title-font:"Archivo",system-ui,sans-serif;--cc-title-weight:700;--cc-text:var(--ink);--cc-accent:var(--accent);--cc-button-radius:999px}
 </style>
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W35G996R"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <header><div class="bar"><a href="./"><img src="img/brand/logo-dark.png" alt="Zhai Auto"></a><a class="back" href="./">Back to the website</a></div></header>
 <main>
 <h1>Privacy notice</h1>
-<p class="meta">Last updated: 30 October 2026</p>
+<p class="meta">Last updated: 24 November 2026</p>
 <p class="lead">Zhai Auto respects your privacy. This notice explains what personal information we collect through this website, why we collect it, who we share it with and the rights you have under the Protection of Personal Information Act 4 of 2013 (POPIA).</p>
 
 <section>
@@ -126,7 +168,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <section>
 <h2>9. Cookies, analytics and advertising</h2>
-<p>We use tools such as Google Analytics, Google Ads and the Meta Pixel to understand how visitors use the website and to measure and improve our advertising. These tools may set cookies or similar identifiers on your device and receive information about your visit. You can block or delete cookies in your browser settings, and manage ad personalisation in your Google and Meta account settings. The website will still work if you block cookies.</p>
+<p>When you first visit, we ask whether we may use cookies. Nothing optional is switched on until you say yes, and saying no does not limit your use of the website. You can change your choice at any time with the &ldquo;Cookie settings&rdquo; link at the bottom of every page, or here: <button type="button" class="foot-cc" data-consent-open>Cookie settings</button>. We remember your choice for 180 days and then ask again.</p>
+<p><strong>Necessary.</strong> We store your cookie choice in your browser so that we do not ask on every page. This is always on.</p>
+<p><strong>Analytics (only if you agree).</strong> Google Analytics shows us which pages are visited and how people reach the website. It sets the cookies <code>_ga</code> and <code>_ga_&lt;id&gt;</code>, which last up to two years.</p>
+<p><strong>Advertising (only if you agree).</strong> Google Ads and Meta (Facebook and Instagram) let us measure whether our advertising works and show our ads to people who have visited the website. They set the cookies <code>_gcl_au</code>, <code>_gcl_aw</code>, <code>_fbp</code> and <code>_fbc</code>, which last up to 90 days.</p>
+<p><strong>If you decline.</strong> No analytics or advertising cookies are set, and the Meta Pixel does not run. Google&rsquo;s tags still send Google basic, cookieless information that a page was viewed (such as the time, your browser type and an approximate location), which is not used to identify you or follow you between visits. Google uses it to estimate totals.</p>
+<p>Google and Meta may process this information outside South Africa (see section 6). You can also manage ad personalisation in your Google and Meta account settings.</p>
 </section>
 
 <section>
@@ -154,5 +201,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </section>
 </main>
 <footer>&copy; 2026 Zhai Auto (Pty) Ltd &middot; 78 York Street, George</footer>
+<link rel="stylesheet" href="img/consent/consent-banner.css?v=1.0">
+<script src="img/consent/consent-banner.js?v=1.0" defer></script>
 </body>
 </html>

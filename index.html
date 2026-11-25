@@ -1,11 +1,55 @@
 <!doctype html><html lang="en-ZA"><head><meta charset=utf8>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-W35G996R');</script>
-<!-- End Google Tag Manager -->
+<!-- cookie consent (consent-banner-kit v1.0): must stay the first thing in <head>. Sets consent to "denied", then loads Tag Manager itself, so Google's own GTM snippet must NOT be added. -->
+<script data-consent="config">
+window.cookieConsentConfig = {
+  gtmId: 'GTM-W35G996R',                   // the site's Tag Manager container. '' = this code does not load Tag Manager
+  liveHosts: ['zhaiauto.co.za'],          // Tag Manager loads only on these addresses (www. is included). [] = load everywhere
+  privacyUrl: 'privacy.html',              // where "privacy policy" in the banner goes. '' = no link
+  position: 'left',                        // 'left', 'right' or 'center' (phones always get a full-width card at the bottom)
+  days: 180,                               // how long a choice is remembered before the banner asks again
+  storageKey: 'cookie-consent',            // name the choice is saved under in the visitor's browser
+  eventName: 'cookie_consent_update',      // dataLayer event sent when a choice is made (for a Tag Manager trigger)
+  delay: 1200,                             // milliseconds before the banner appears on a first visit
+  text: {}                                 // optional wording changes, see README ("changing the wording")
+};
+</script>
+<script data-consent="core">
+/* cookie consent core, v1.0. Sets Google Consent Mode v2 to "denied" before anything else runs, re-applies a saved choice, then loads Tag Manager. */
+(function (w, d) {
+  var cfg = w.cookieConsentConfig || {}, KEY = cfg.storageKey || 'cookie-consent', LIFE = (cfg.days || 180) * 864e5,
+      EVT = cfg.eventName || 'cookie_consent_update', g = function (b) { return b ? 'granted' : 'denied'; };
+  w.dataLayer = w.dataLayer || [];
+  function gtag() { w.dataLayer.push(arguments); }
+  w.gtag = w.gtag || gtag;
+  gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied',
+    personalization_storage: 'denied', functionality_storage: 'granted', security_storage: 'granted', wait_for_update: 500 });
+  gtag('set', 'ads_data_redaction', true);
+  function send(c) { gtag('consent', 'update', { analytics_storage: g(c.a), ad_storage: g(c.m), ad_user_data: g(c.m), ad_personalization: g(c.m) }); }
+  var c = null;
+  try { c = JSON.parse(localStorage.getItem(KEY)); if (!c || c.v !== 1 || !(Date.now() - c.t < LIFE)) c = null; } catch (e) { c = null; }
+  if (c) send(c);
+  w.cookieConsent = {
+    config: cfg,
+    get: function () { return c; },
+    set: function (a, m) {
+      c = { v: 1, a: a ? 1 : 0, m: m ? 1 : 0, t: Date.now() };
+      try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+      send(c);
+      w.dataLayer.push({ event: EVT, consent_analytics: g(c.a), consent_marketing: g(c.m) });
+      return c;
+    }
+  };
+  w.dataLayer.push({ consent_analytics: g(c && c.a), consent_marketing: g(c && c.m), consent_chosen: !!c });
+  var id = /^GTM-[A-Z0-9]+$/.test(cfg.gtmId || '') ? cfg.gtmId : '', hosts = cfg.liveHosts || [], host = location.hostname.replace(/^www\./, ''), live = !hosts.length;
+  for (var i = 0; i < hosts.length; i++) if (String(hosts[i]).replace(/^www\./, '') === host) live = true;
+  if (id && (live || /[?&]gtm_debug=/.test(location.search))) {
+    w.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+    var f = d.getElementsByTagName('script')[0], j = d.createElement('script');
+    j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + id; f.parentNode.insertBefore(j, f);
+  }
+})(window, document);
+</script>
+<!-- end cookie consent -->
 <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
 <title>Zhai Auto George | Peugeot, Citroën, Opel, Jeep &amp; Fiat</title>
 <meta name="description" content="New, demo and pre-owned Peugeot, Citroën, Opel, Jeep and Fiat cars in George. Specials, finance, service and parts at Zhai Auto, 78 York Street.">
@@ -30,10 +74,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="twitter:image" content="https://zhaiauto.co.za/img/meta/social.jpg">
 <link rel="preload" href="img/fonts/hanken-grotesk-var.woff2" as="font" type="font/woff2" crossorigin="">
 </head><body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W35G996R"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
 <style>
 /* round 10: fonts are self-hosted (latin subset, variable): Archivo wght 400-800 x wdth 100-125, Hanken Grotesk wght 400-700. OFL licences in img/fonts. */
 @font-face{font-family:"Archivo";font-style:normal;font-weight:400 800;font-stretch:100% 125%;font-display:swap;src:url(img/fonts/archivo-var.woff2) format("woff2")}
@@ -165,7 +205,7 @@ img.lz.in{opacity:1}
 .stats > div:first-child{padding-left:0;border-left:0}
 .stats dt{font-size:12.5px;color:var(--ink);white-space:nowrap;display:flex;align-items:center;gap:4px}
 .stats dd{margin:2px 0 0;font-size:19px;font-weight:600;white-space:nowrap;letter-spacing:-.01em}
-.stats.n1 dd{font-size:22px}
+.stats.n1 dd{font-size:22px;white-space:normal}
 .tip{border:0;background:none;padding:0 2px;line-height:1;vertical-align:super;font-size:11px;font-weight:700;color:var(--ink)}
 .tip.i{vertical-align:middle;display:inline-grid;place-items:center;width:15px;height:15px;border:1.3px solid currentColor;border-radius:50%;font-size:10px;font-weight:700;font-style:normal;padding:0}
 .c-cta{margin-top:18px;height:46px;border-radius:var(--r-ctl);border:1.5px solid var(--accent);background:var(--surface);font-size:15px;font-weight:500;transition:background .2s,color .2s}
@@ -197,6 +237,8 @@ img.lz.in{opacity:1}
 .stats.stack > div:first-child dd{font-size:23px}
 .stats.stack > div:nth-child(2){padding-left:0;border-left:0}
 .stats.stack > div:nth-child(3){padding-left:14px;border-left:1px solid var(--line-strong)}
+.stats.n2.stack > div:nth-child(2){grid-column:1/-1}
+.stats.n2.stack > div:nth-child(2) dd{white-space:normal}
 @container (max-width:380px){
   .cb{padding:16px 18px 18px}
   .chips{gap:8px}
@@ -1045,6 +1087,9 @@ main{padding-block:0 64px}
 .wa-float{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:45;width:56px;height:56px;border-radius:50%;background:#25d366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -10px rgba(0,0,0,.6);transition:transform .3s cubic-bezier(.2,.8,.2,1),bottom .3s}
 .wa-float svg{width:28px;height:28px}
 .wa-float.away{transform:scale(0)}
+/* cookie banner (consent-banner-kit, img/consent/): the site's fonts, colours and corners; on phones the WhatsApp button steps aside while it is open */
+html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:700;--cc-text:var(--ink);--cc-accent:var(--accent);--cc-radius:var(--r-card);--cc-button-radius:999px}
+@media (max-width:560px){html.cc-open .wa-float{transform:scale(0);pointer-events:none}}
 .ctray.on ~ .wa-float{bottom:calc(90px + env(safe-area-inset-bottom,0px))}
 
 /* ---------- round 7: offer banners (section layout "promo") ---------- */
@@ -1349,6 +1394,8 @@ main{padding-block:0 64px}
   priceMode: "calculated" (monthly worked out from finance terms),
              "fixed" (monthly typed in: monthlyFixed + monthlyNote),
              "cash" (no monthly shown).
+  priceNote on a vehicle (e.g. "excl. VAT"): label shown after that car's price;
+             use it with "cash" or "fixed", never "calculated".
   finance on a vehicle overrides the dealer defaults for that car only.
   =====================================================================
 -->
@@ -1567,7 +1614,17 @@ main{padding-block:0 64px}
     "cars/peugeot-partner-swb-1": "#b8b7b9",
     "cars/peugeot-partner-swb-2": "#55849c",
     "cars/peugeot-partner-lwb-0": "#d9d9d9",
-    "cars/peugeot-partner-lwb-1": "#55849c"
+    "cars/peugeot-partner-lwb-1": "#55849c",
+    "site/special-dec26-aircross": "#8c8c8c",
+    "site/special-dec26-c3": "#8c837d",
+    "site/special-dec26-hola": "#a2948c",
+    "site/special-dec26-basalt": "#4c556b",
+    "site/special-dec26-landtrek": "#828286",
+    "site/special-dec26-partner": "#5c6d79",
+    "site/special-dec26-grandland": "#676c77",
+    "site/special-dec26-wrangler": "#5e5f61",
+    "cars/citroen-c3-hola-0": "#98877b",
+    "site/special-dec26-c3-auto": "#90827a"
   },
   "meta": {
     "title": "Zhai Auto George | Peugeot, Citroën, Opel, Jeep & Fiat",
@@ -1619,7 +1676,7 @@ main{padding-block:0 64px}
       "uploads": true
     },
     "tracking": {
-      "_help": "Google Tag Manager container ID. The same ID must also be in the GTM snippet in <head> and in privacy.html. dataLayer events: see TRACKING-PLAN.md.",
+      "_help": "Google Tag Manager container ID. The cookie banner's head snippet (first thing in <head>, also in privacy.html) loads this container after setting consent; Google's own GTM snippet must not be added. dataLayer events: see TRACKING-PLAN.md.",
       "gtmId": "GTM-W35G996R",
       "metaPixelId": "2200976354120255",
       "metaPixelHosts": [
@@ -1753,7 +1810,7 @@ main{padding-block:0 64px}
           "focusMobile": "64% 50%",
           "kicker": "Opel",
           "title": "The new Grandland",
-          "text": "From R739 900, or from R9 828 pm*. Edition and GS Line, now in George.",
+          "text": "GS Line from R629 900* this December, including up to R170 000 deal assistance. Edition and GS Line, now in George.",
           "cta": "View the Grandland",
           "vehicle": "opel-grandland-edition"
         },
@@ -1763,7 +1820,7 @@ main{padding-block:0 64px}
           "focusMobile": "42% 60%",
           "kicker": "Peugeot",
           "title": "Landtrek. Built to work.",
-          "text": "Single and double cab bakkies from R338 900*, with R50 000 retail assistance on selected models.",
+          "text": "Professional single cab at R278 173 excl. VAT. Professional double cab at R5 999 pm*, with R30 000 of accessories included.",
           "cta": "See the Landtrek offers",
           "href": "#specials"
         },
@@ -1773,7 +1830,7 @@ main{padding-block:0 64px}
           "focusMobile": "70% 62%",
           "kicker": "Citroën",
           "title": "C3 Aircross. Room for seven.",
-          "text": "Five or seven seats, from R281 500. Also see the C3 Max and Basalt.",
+          "text": "Five or seven seats. The Max automatic 5-seater is R4 143 pm* this December. Also see the C3 Max and Basalt.",
           "cta": "Explore Citroën",
           "href": "#citroen"
         },
@@ -1783,7 +1840,7 @@ main{padding-block:0 64px}
           "focusMobile": "70% 62%",
           "kicker": "Jeep",
           "title": "Gladiator. Go further.",
-          "text": "Wrangler and Gladiator, from R1 289 900 or R14 871 pm*.",
+          "text": "Wrangler and Gladiator, with 4x4 on every model. See the December Wrangler Sahara offer under Specials.",
           "cta": "Explore Jeep",
           "href": "#jeep"
         }
@@ -1839,7 +1896,7 @@ main{padding-block:0 64px}
         "video": "media/opel-banner.mp4",
         "kicker": "Opel Grandland",
         "title": "The new Grandland",
-        "text": "Bold new design, inside and out. Edition and GS Line, from R739 900.",
+        "text": "Bold new design, inside and out. GS Line from R629 900* this December, including up to R170 000 deal assistance.",
         "cta": "View the Grandland",
         "vehicle": "opel-grandland-edition",
         "cta2": "Book a test drive"
@@ -1853,7 +1910,7 @@ main{padding-block:0 64px}
         "tint": "#f4efe9",
         "kicker": "Citroën C3 Aircross",
         "title": "Room for the whole family",
-        "text": "Five or seven seats, from R281 500. Also see the C3 and the Basalt.",
+        "text": "Five or seven seats. The Max automatic 5-seater is R4 143 pm* this December. Also see the C3 and the Basalt.",
         "cta": "See the Aircross",
         "vehicle": "citroen-aircross-plus-mt",
         "cta2": "Book a test drive"
@@ -1866,7 +1923,7 @@ main{padding-block:0 64px}
         "kicker": "Jeep Wrangler & Gladiator",
         "title": "Go anywhere.",
         "text": "Built for the trail less travelled, and the school run.",
-        "stats": "3 | models in George\n4x4 | on every model\nR1 289 900 | Wrangler Sahara, from",
+        "stats": "4x4 | on every model",
         "cta": "See the Gladiator",
         "vehicle": "jeep-gladiator-rubicon",
         "cta2": "Book a test drive",
@@ -2014,6 +2071,10 @@ main{padding-block:0 64px}
       [
         "Privacy notice",
         "privacy.html"
+      ],
+      [
+        "Cookie settings",
+        "cookies"
       ]
     ],
     "info": {
@@ -2150,13 +2211,17 @@ main{padding-block:0 64px}
       "intro": "Current offers at Zhai Auto in George. Limited stock, while it lasts. Ts and Cs apply.",
       "cta": "View offer",
       "vehicles": [
-        "special-opel-grandland",
-        "special-opel-corsa-irmscher",
         "special-citroen-aircross-max",
         "special-citroen-c3-max",
+        "special-citroen-c3-max-auto",
+        "special-citroen-c3-hola",
+        "special-citroen-basalt-max",
         "special-peugeot-landtrek-sc",
         "special-peugeot-landtrek-dc",
-        "special-peugeot-2008"
+        "special-peugeot-partner-swb",
+        "special-peugeot-partner-lwb",
+        "special-opel-grandland",
+        "special-jeep-wrangler-sahara"
       ],
       "layout": "promo"
     },
@@ -2290,108 +2355,40 @@ main{padding-block:0 64px}
   "models": {},
   "vehicles": [
     {
-      "id": "special-opel-grandland",
-      "slug": "special-opel-grandland",
-      "model": "",
-      "condition": "new",
-      "year": "2026",
-      "make": "Opel",
-      "title": "Opel Grandland",
-      "sub": "1.2T Edition automatic",
-      "extra": "From R9 828 pm*",
-      "transmission": "Automatic",
-      "fuel": "Petrol",
-      "price": 739900,
-      "priceMode": "fixed",
-      "images": [
-        "cars/opel-grandland-gs-0",
-        "cars/opel-grandland-gs-1",
-        "cars/opel-grandland-gs-2"
-      ],
-      "monthlyFixed": 9828,
-      "monthlyNote": "Dealer finance offer. Ts and Cs apply. Visuals for illustration purposes only; options and specifications may vary by model.",
-      "promo": {
-        "style": "full",
-        "image": "site/bnr-opel",
-        "focus": "58% 58%",
-        "focusMobile": "72% 60%",
-        "kicker": "Opel",
-        "title": "The new Opel Grandland",
-        "sub": "1.2T Edition automatic",
-        "headline": "R9 828 pm*",
-        "note": "R739 900 retail",
-        "text": "Bold new design, inside and out. Now in George.",
-        "terms": "*Dealer finance offer. Ts and Cs apply. Visuals for illustration only."
-      }
-    },
-    {
-      "id": "special-opel-corsa-irmscher",
-      "slug": "special-opel-corsa-irmscher",
-      "model": "",
-      "condition": "new",
-      "year": "2026",
-      "make": "Opel",
-      "title": "Opel Corsa",
-      "sub": "Irmscher Edition",
-      "extra": "48 months · 0% deposit · 62% balloon",
-      "transmission": "Automatic",
-      "fuel": "Petrol",
-      "price": 534900,
-      "priceMode": "fixed",
-      "images": [
-        "cars/opel-corsa-irmscher-0",
-        "cars/opel-corsa-irmscher-1",
-        "cars/opel-corsa-irmscher-2"
-      ],
-      "monthlyFixed": 7600,
-      "monthlyNote": "R534 900 retail. 48 months, 0% deposit, 62% balloon. Ts and Cs apply.",
-      "promo": {
-        "style": "studio",
-        "image": "cars/opel-corsa-irmscher-1",
-        "focus": "50% 50%",
-        "tint": "#e9e7e2",
-        "watermark": "Irmscher",
-        "kicker": "Opel",
-        "title": "Opel Corsa Irmscher",
-        "sub": "Irmscher Edition automatic",
-        "headline": "R7 600 pm*",
-        "note": "R534 900 retail",
-        "text": "48 months, 0% deposit and a 62% balloon.",
-        "terms": "*Dealer finance offer. Ts and Cs apply."
-      }
-    },
-    {
       "id": "special-citroen-aircross-max",
       "slug": "special-citroen-aircross-max",
       "model": "",
       "condition": "new",
       "year": "2026",
       "make": "Citroën",
-      "title": "Citroën Aircross",
-      "sub": "Max automatic",
-      "extra": "6 airbags · 10.5-inch screen · wireless Apple CarPlay",
+      "title": "Citroën C3 Aircross",
+      "sub": "Max 1.2T automatic, 5-seater",
+      "extra": "72 months · 10% deposit · 40% balloon",
       "transmission": "Automatic",
       "fuel": "Petrol",
-      "price": 320000,
-      "priceMode": "calculated",
+      "price": 386500,
+      "priceMode": "fixed",
       "images": [
         "cars/citroen-aircross-max-0",
         "cars/citroen-aircross-max-1",
         "cars/citroen-aircross-max-2"
       ],
+      "monthlyFixed": 4143,
+      "monthlyNote": "R386 500 retail. 72 months, 10% deposit (R38 650), 40% balloon (R154 600), 6.50% linked interest rate. Cost of credit R453 684. Excludes an initiation fee of R1 208 and a monthly service fee of R68 incl. VAT. 3-month payment holiday applies. Finance subject to approval. Ts and Cs apply.",
       "promo": {
         "style": "split",
-        "image": "site/scene-aircross",
-        "focus": "40% 62%",
-        "focusMobile": "38% 66%",
-        "tint": "#f4efe9",
+        "image": "site/special-dec26-aircross",
+        "focus": "50% 62%",
+        "focusMobile": "50% 68%",
+        "tint": "#e9e3dc",
+        "badge": "3-month payment holiday",
         "kicker": "Citroën",
         "title": "Citroën C3 Aircross Max",
-        "sub": "Max automatic",
-        "headline": "R320 000",
-        "note": "Special price",
-        "text": "6 airbags, a 10.5-inch screen and wireless Apple CarPlay.",
-        "terms": "Ts and Cs apply. While stocks last."
+        "sub": "1.2T automatic, 5-seater",
+        "headline": "R4 143 pm*",
+        "note": "R386 500 retail",
+        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
       }
     },
     {
@@ -2402,12 +2399,12 @@ main{padding-block:0 64px}
       "year": "2026",
       "make": "Citroën",
       "title": "Citroën C3",
-      "sub": "Max crossover",
-      "extra": "6 airbags · reverse camera with sensors",
+      "sub": "Max 1.2 manual",
+      "extra": "10-inch HD touchscreen · wireless Apple CarPlay and Android Auto",
       "transmission": "Manual",
       "fuel": "Petrol",
-      "price": 209900,
-      "priceMode": "calculated",
+      "price": 274900,
+      "priceMode": "cash",
       "images": [
         "cars/citroen-c3-max-mt-0",
         "cars/citroen-c3-max-mt-1",
@@ -2415,17 +2412,124 @@ main{padding-block:0 64px}
       ],
       "promo": {
         "style": "split-rev",
-        "image": "site/bnr-citroen-c3",
-        "focus": "56% 45%",
-        "focusMobile": "58% 45%",
-        "tint": "#f6efe6",
+        "image": "site/special-dec26-c3",
+        "focus": "55% 55%",
+        "focusMobile": "55% 52%",
+        "tint": "#f1e9e1",
         "kicker": "Citroën",
         "title": "Citroën C3 Max",
-        "sub": "Max crossover",
-        "headline": "R209 900",
+        "sub": "1.2 manual, 5-speed",
+        "headline": "R274 900",
         "note": "Special price",
-        "text": "6 airbags and a reverse camera with sensors.",
-        "terms": "Ts and Cs apply. While stocks last."
+        "text": "A 10-inch HD touchscreen, wireless Apple CarPlay and Android Auto, and SUV-inspired styling. Just 5.6 L/100 km.",
+        "terms": "Includes a 5-year/100 000 km warranty and a 2-year/30 000 km service plan. Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-citroen-c3-max-auto",
+      "slug": "special-citroen-c3-max-auto",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Citroën",
+      "title": "Citroën C3",
+      "sub": "Max 1.2T automatic",
+      "extra": "72 months · 10% deposit · 40% balloon",
+      "transmission": "Automatic",
+      "fuel": "Petrol",
+      "price": 317900,
+      "priceMode": "fixed",
+      "images": [
+        "cars/citroen-c3-max-at-0",
+        "cars/citroen-c3-max-at-1",
+        "cars/citroen-c3-max-at-2"
+      ],
+      "monthlyFixed": 3602,
+      "monthlyNote": "R317 900 retail. 72 months, 10% deposit (R31 790), 40% balloon (R127 160), 7.54% linked interest rate. Cost of credit R387 774. Excludes an initiation fee of R1 208 and a monthly service fee of R69 incl. VAT. Standard 2-year/30 000 km service plan extended to 4 years/60 000 km on this offer. Finance subject to approval. Ts and Cs apply.",
+      "promo": {
+        "style": "split",
+        "image": "site/special-dec26-c3-auto",
+        "focus": "50% 55%",
+        "focusMobile": "55% 55%",
+        "tint": "#efe9e4",
+        "badge": "Service plan extended to 4 years/60 000 km",
+        "kicker": "Citroën",
+        "title": "Citroën C3 Max automatic",
+        "sub": "1.2T, 6-speed automatic",
+        "headline": "R3 602 pm*",
+        "note": "R317 900 retail",
+        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-citroen-c3-hola",
+      "slug": "special-citroen-c3-hola",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Citroën",
+      "title": "Citroën C3 Hola",
+      "sub": "1.2 panel van",
+      "extra": "386 kg payload · 5.6 L/100 km",
+      "transmission": "Manual",
+      "fuel": "Petrol",
+      "price": 199900,
+      "priceNote": "excl. VAT",
+      "priceMode": "cash",
+      "images": [
+        "cars/citroen-c3-hola-0"
+      ],
+      "promo": {
+        "style": "split-rev",
+        "image": "site/special-dec26-hola",
+        "focus": "50% 72%",
+        "focusMobile": "50% 78%",
+        "tint": "#efe9e2",
+        "kicker": "Citroën",
+        "title": "Citroën C3 Hola",
+        "sub": "Panel van, 1.2 petrol",
+        "headline": "R199 900 excl. VAT",
+        "note": "Special price",
+        "text": "A 386 kg payload, 5.6 L/100 km and a 10-inch HD touchscreen with Apple CarPlay and Android Auto.",
+        "terms": "Price excludes VAT. Includes a 5-year/100 000 km warranty and a 2-year/30 000 km service plan. Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-citroen-basalt-max",
+      "slug": "special-citroen-basalt-max",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Citroën",
+      "title": "Citroën Basalt",
+      "sub": "Max 1.2T automatic",
+      "extra": "72 months · 10% deposit · 40% balloon",
+      "transmission": "Automatic",
+      "fuel": "Petrol",
+      "price": 369900,
+      "priceMode": "fixed",
+      "images": [
+        "cars/citroen-basalt-max-0",
+        "cars/citroen-basalt-max-1",
+        "cars/citroen-basalt-max-2"
+      ],
+      "monthlyFixed": 4140,
+      "monthlyNote": "R369 900 retail. 72 months, 10% deposit (R36 990), 40% balloon (R147 960), 6.99% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R441 915. Excludes an initiation fee of R1 208. 90-day payment holiday applies. Finance subject to approval. Ts and Cs apply.",
+      "promo": {
+        "style": "split",
+        "image": "site/special-dec26-basalt",
+        "focus": "45% 58%",
+        "focusMobile": "45% 62%",
+        "tint": "#e6e9ef",
+        "badge": "90-day payment holiday",
+        "kicker": "Citroën",
+        "title": "Citroën Basalt Max",
+        "sub": "1.2T, 6-speed automatic",
+        "headline": "R4 140 pm*",
+        "note": "R369 900 retail",
+        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
       }
     },
     {
@@ -2436,30 +2540,31 @@ main{padding-block:0 64px}
       "year": "2026",
       "make": "Peugeot",
       "title": "Peugeot Landtrek",
-      "sub": "Professional single cab diesel",
-      "extra": "Includes R50 000 retail assistance",
+      "sub": "Professional 1.9D 4x2 manual single cab",
+      "extra": "3-ton towing capacity · 1 100 kg payload",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 338900,
-      "priceMode": "calculated",
+      "price": 278173,
+      "priceNote": "excl. VAT",
+      "priceMode": "cash",
       "images": [
         "cars/peugeot-landtrek-pro-sc-0",
         "cars/peugeot-landtrek-pro-sc-1",
         "cars/peugeot-landtrek-pro-sc-2"
       ],
       "promo": {
-        "style": "full",
-        "image": "site/scene-landtrek-oem",
-        "focus": "50% 70%",
-        "focusMobile": "72% 70%",
-        "badge": "R50 000 retail assistance",
+        "style": "split-rev",
+        "image": "site/special-dec26-landtrek",
+        "focus": "50% 55%",
+        "focusMobile": "50% 58%",
+        "tint": "#ecebe8",
         "kicker": "Peugeot",
         "title": "Peugeot Landtrek",
-        "sub": "Professional single cab diesel",
-        "headline": "R338 900",
-        "note": "Retail assistance included",
-        "text": "A hard-working single cab bakkie, ready for the job.",
-        "terms": "Retail assistance included in the price shown. Ts and Cs apply."
+        "sub": "Professional single cab, 1.9D 4x2 manual",
+        "headline": "R278 173 excl. VAT",
+        "note": "R319 899 incl. VAT",
+        "text": "7.1 L/100 km, a 3-ton towing capacity and a 1 100 kg payload.",
+        "terms": "Ts and Cs apply. While stocks last."
       }
     },
     {
@@ -2470,66 +2575,174 @@ main{padding-block:0 64px}
       "year": "2026",
       "make": "Peugeot",
       "title": "Peugeot Landtrek",
-      "sub": "Professional double cab 4x2 diesel",
-      "extra": "Includes R50 000 retail assistance",
+      "sub": "Professional 1.9D 4x2 manual double cab",
+      "extra": "R30 000 accessories included",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 404900,
-      "priceMode": "calculated",
+      "price": null,
+      "priceMode": "fixed",
       "images": [
-        "cars/peugeot-landtrek-pro-dc-0",
-        "cars/peugeot-landtrek-pro-dc-1",
-        "cars/peugeot-landtrek-pro-dc-2"
+        "cars/peugeot-landtrek-pro-oem-0"
       ],
+      "monthlyFixed": 5999,
+      "monthlyNote": "No deposit and no balloon, at a linked interest rate of prime plus 1%. 3-month payment holiday applies. Includes an accessories package valued at R30 000: rubberising, safety film, towbar, side steps and nudge bar. Term, retail price and total cost of credit are available on request. Finance subject to approval. Ts and Cs apply.",
       "promo": {
-        "style": "split-rev",
-        "image": "site/scene-landtrek",
-        "focus": "62% 55%",
-        "focusMobile": "64% 58%",
-        "tint": "#eef0f2",
-        "badge": "R50 000 retail assistance",
+        "style": "split",
+        "image": "site/special-dec26-landtrek",
+        "focus": "50% 55%",
+        "focusMobile": "50% 58%",
+        "tint": "#e8ecef",
+        "badge": "R30 000 accessories included",
         "kicker": "Peugeot",
         "title": "Peugeot Landtrek",
-        "sub": "Professional double cab 4x2 diesel",
-        "headline": "R404 900",
-        "note": "Retail assistance included",
-        "text": "Room for the crew, and the load.",
-        "terms": "Retail assistance included in the price shown. Ts and Cs apply."
+        "sub": "Professional double cab, 1.9D 4x2 manual",
+        "headline": "R5 999 pm*",
+        "note": "3-month payment holiday",
+        "text": "Includes rubberising, safety film, towbar, side steps and nudge bar.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
       }
     },
     {
-      "id": "special-peugeot-2008",
-      "slug": "special-peugeot-2008",
+      "id": "special-peugeot-partner-swb",
+      "slug": "special-peugeot-partner-swb",
       "model": "",
       "condition": "new",
       "year": "2026",
       "make": "Peugeot",
-      "title": "Peugeot 2008",
-      "sub": "Shades of winter edition",
-      "extra": "Includes R20 000 retail assistance",
-      "transmission": "Automatic",
-      "fuel": "Petrol",
-      "price": 499900,
-      "priceMode": "calculated",
+      "title": "Peugeot Partner",
+      "sub": "1.6L panel van SWB",
+      "extra": "72 months · 0% deposit · 35% balloon",
+      "transmission": "Manual",
+      "fuel": "Diesel",
+      "price": 359612,
+      "priceNote": "excl. VAT",
+      "priceMode": "fixed",
       "images": [
-        "cars/peugeot-2008-gt-0",
-        "cars/peugeot-2008-gt-1",
-        "cars/peugeot-2008-gt-2"
+        "cars/peugeot-partner-swb-0",
+        "cars/peugeot-partner-swb-1",
+        "cars/peugeot-partner-swb-2"
+      ],
+      "monthlyFixed": 6349,
+      "monthlyNote": "72 months, 0% deposit, 35% balloon, 6.66% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Total cost R618 764. Excludes an initiation fee of R1 208. Finance subject to approval. Ts and Cs apply.",
+      "promo": {
+        "style": "split-rev",
+        "image": "site/special-dec26-partner",
+        "focus": "55% 50%",
+        "focusMobile": "55% 50%",
+        "tint": "#e9edf0",
+        "kicker": "Peugeot",
+        "title": "Peugeot Partner SWB",
+        "sub": "1.6L panel van",
+        "headline": "R6 349 pm*",
+        "note": "or R359 612 excl. VAT",
+        "text": "72 months, 0% deposit and a 35% balloon. Just 5.1 L/100 km.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-peugeot-partner-lwb",
+      "slug": "special-peugeot-partner-lwb",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Peugeot",
+      "title": "Peugeot Partner",
+      "sub": "1.6L panel van LWB",
+      "extra": "5.1 L/100 km",
+      "transmission": "Manual",
+      "fuel": "Diesel",
+      "price": 367821,
+      "priceNote": "excl. VAT",
+      "priceMode": "cash",
+      "images": [
+        "cars/peugeot-partner-lwb-0",
+        "cars/peugeot-partner-lwb-1"
       ],
       "promo": {
         "style": "split",
-        "image": "site/banner-peugeot-2008",
-        "focus": "42% 60%",
-        "focusMobile": "40% 62%",
-        "tint": "#f1eef6",
-        "badge": "R20 000 retail assistance",
+        "image": "site/special-dec26-partner",
+        "focus": "55% 50%",
+        "focusMobile": "55% 50%",
+        "tint": "#ededed",
         "kicker": "Peugeot",
-        "title": "Peugeot 2008",
-        "sub": "Shades of winter edition",
-        "headline": "R499 900",
-        "note": "Retail assistance included",
-        "text": "The striking compact SUV, now with R20 000 retail assistance.",
-        "terms": "Retail assistance included in the price shown. Ts and Cs apply."
+        "title": "Peugeot Partner LWB",
+        "sub": "1.6L panel van",
+        "headline": "R367 821 excl. VAT",
+        "note": "R422 994 incl. VAT",
+        "text": "Long-wheelbase load space, using just 5.1 L/100 km.",
+        "terms": "Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-opel-grandland",
+      "slug": "special-opel-grandland",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Opel",
+      "title": "Opel Grandland",
+      "sub": "GS Line 1.6T automatic",
+      "extra": "Deal assistance up to R170 000",
+      "transmission": "Automatic",
+      "fuel": "Petrol",
+      "price": 629900,
+      "priceNote": "after deal assistance",
+      "priceMode": "cash",
+      "images": [
+        "cars/opel-grandland-gs-0",
+        "cars/opel-grandland-gs-1",
+        "cars/opel-grandland-gs-2"
+      ],
+      "promo": {
+        "style": "split-rev",
+        "image": "site/special-dec26-grandland",
+        "focus": "45% 72%",
+        "focusMobile": "45% 78%",
+        "tint": "#ecebee",
+        "badge": "Deal assistance up to R170 000",
+        "kicker": "Opel",
+        "title": "Opel Grandland GS Line",
+        "sub": "1.6T automatic",
+        "headline": "R629 900",
+        "note": "R799 900 retail",
+        "text": "48-month Guaranteed Future Value, panoramic sunroof and wireless Apple CarPlay and Android Auto.",
+        "terms": "Price shown includes the maximum deal assistance of R170 000. Includes a 5-year/105 000 km maintenance plan and a 5-year/100 000 km warranty. Ts and Cs apply. While stocks last."
+      }
+    },
+    {
+      "id": "special-jeep-wrangler-sahara",
+      "slug": "special-jeep-wrangler-sahara",
+      "model": "",
+      "condition": "new",
+      "year": "2026",
+      "make": "Jeep",
+      "title": "Jeep Wrangler",
+      "sub": "Sahara 2.0L 4x4 automatic, 4-door",
+      "extra": "48 months · 10% deposit · 69% Guaranteed Future Value",
+      "transmission": "Automatic",
+      "fuel": "Petrol",
+      "price": 1315900,
+      "priceMode": "fixed",
+      "images": [
+        "cars/jeep-wrangler-sahara-0",
+        "cars/jeep-wrangler-sahara-1"
+      ],
+      "monthlyFixed": 13165,
+      "monthlyNote": "R1 315 900 retail. 48 months, 10% deposit (R131 590), Guaranteed Future Value 69% (R907 971), 8.16% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R1 526 704. Excludes an initiation fee of R1 208. Finance subject to approval. Ts and Cs apply.",
+      "promo": {
+        "style": "split",
+        "image": "site/special-dec26-wrangler",
+        "focus": "55% 50%",
+        "focusMobile": "55% 50%",
+        "tint": "#e9ecef",
+        "badge": "Trade assist up to R160 000",
+        "kicker": "Jeep",
+        "title": "Jeep Wrangler Sahara",
+        "sub": "2.0L 4x4 automatic, 4-door",
+        "headline": "R13 165 pm*",
+        "note": "R1 315 900 retail",
+        "text": "Guaranteed Future Value over 48 months, or buy at R1 315 900 with trade assist on qualifying trade-ins.",
+        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
       }
     },
     {
@@ -2544,15 +2757,14 @@ main{padding-block:0 64px}
       "extra": "",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 396900,
-      "priceMode": "fixed",
+      "price": 278173,
+      "priceNote": "excl. VAT",
+      "priceMode": "cash",
       "images": [
         "cars/peugeot-landtrek-pro-sc-0",
         "cars/peugeot-landtrek-pro-sc-1",
         "cars/peugeot-landtrek-pro-sc-2"
-      ],
-      "monthlyFixed": 5283,
-      "monthlyNote": "Peugeot South Africa's published finance offer, checked 23 November 2026: 72 months, 0% deposit, 40% balloon, 7.93% linked interest rate, retail price R396 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      ]
     },
     {
       "id": "peugeot-landtrek-pro-dc",
@@ -2566,13 +2778,13 @@ main{padding-block:0 64px}
       "extra": "",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 463900,
+      "price": null,
       "priceMode": "fixed",
       "images": [
         "cars/peugeot-landtrek-pro-oem-0"
       ],
-      "monthlyFixed": 5981,
-      "monthlyNote": "Peugeot South Africa's published finance offer, checked 23 November 2026: 72 months, 0% deposit, 40% balloon, 7.27% linked interest rate, retail price R463 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      "monthlyFixed": 5999,
+      "monthlyNote": "No deposit and no balloon, at a linked interest rate of prime plus 1%. 3-month payment holiday applies. Includes an accessories package valued at R30 000: rubberising, safety film, towbar, side steps and nudge bar. Term, retail price and total cost of credit are available on request. Finance subject to approval. Ts and Cs apply."
     },
     {
       "id": "peugeot-landtrek-allure-dc",
@@ -2909,13 +3121,16 @@ main{padding-block:0 64px}
       "extra": "",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 479900,
-      "priceMode": "cash",
+      "price": 359612,
+      "priceNote": "excl. VAT",
+      "priceMode": "fixed",
       "images": [
         "cars/peugeot-partner-swb-0",
         "cars/peugeot-partner-swb-1",
         "cars/peugeot-partner-swb-2"
       ],
+      "monthlyFixed": 6349,
+      "monthlyNote": "72 months, 0% deposit, 35% balloon, 6.66% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Total cost R618 764. Excludes an initiation fee of R1 208. Finance subject to approval. Ts and Cs apply.",
       "content": {
         "stats": [
           [
@@ -3027,7 +3242,8 @@ main{padding-block:0 64px}
       "extra": "",
       "transmission": "Manual",
       "fuel": "Diesel",
-      "price": 508900,
+      "price": 367821,
+      "priceNote": "excl. VAT",
       "priceMode": "cash",
       "images": [
         "cars/peugeot-partner-lwb-0",
@@ -3248,15 +3464,14 @@ main{padding-block:0 64px}
       "extra": "",
       "transmission": "Automatic",
       "fuel": "Petrol",
-      "price": 799900,
-      "priceMode": "fixed",
+      "price": 629900,
+      "priceNote": "after deal assistance",
+      "priceMode": "cash",
       "images": [
         "cars/opel-grandland-gs-0",
         "cars/opel-grandland-gs-1",
         "cars/opel-grandland-gs-2"
-      ],
-      "monthlyFixed": 10361,
-      "monthlyNote": "Opel South Africa's published finance offer, checked 23 November 2026: 72 months, 0% deposit, 40% balloon, 7.4% linked interest rate, retail price R799 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      ]
     },
     {
       "id": "citroen-c3-max-mt",
@@ -3271,14 +3486,12 @@ main{padding-block:0 64px}
       "transmission": "Manual",
       "fuel": "Petrol",
       "price": 274900,
-      "priceMode": "fixed",
+      "priceMode": "cash",
       "images": [
         "cars/citroen-c3-max-mt-0",
         "cars/citroen-c3-max-mt-1",
         "cars/citroen-c3-max-mt-2"
-      ],
-      "monthlyFixed": 3035,
-      "monthlyNote": "Citroën South Africa's published finance offer, checked 23 November 2026: 72 months, 10% deposit, 40% balloon, 7.02% linked interest rate, retail price R274 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      ]
     },
     {
       "id": "citroen-aircross-plus-mt",
@@ -3320,8 +3533,8 @@ main{padding-block:0 64px}
         "cars/citroen-c3-max-at-1",
         "cars/citroen-c3-max-at-2"
       ],
-      "monthlyFixed": 3558,
-      "monthlyNote": "Citroën South Africa's published finance offer, checked 23 November 2026: 72 months, 10% deposit, 40% balloon, 7.3% linked interest rate, retail price R317 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      "monthlyFixed": 3602,
+      "monthlyNote": "R317 900 retail. 72 months, 10% deposit (R31 790), 40% balloon (R127 160), 7.54% linked interest rate. Cost of credit R387 774. Excludes an initiation fee of R1 208 and a monthly service fee of R69 incl. VAT. Standard 2-year/30 000 km service plan extended to 4 years/60 000 km on this offer. Finance subject to approval. Ts and Cs apply."
     },
     {
       "id": "citroen-aircross-max-at",
@@ -3343,7 +3556,7 @@ main{padding-block:0 64px}
         "cars/citroen-aircross-max-2"
       ],
       "monthlyFixed": 4143,
-      "monthlyNote": "Citroën South Africa's published finance offer, checked 23 November 2026: 72 months, 10% deposit, 40% balloon, 6.5% linked interest rate, retail price R386 500 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      "monthlyNote": "R386 500 retail. 72 months, 10% deposit (R38 650), 40% balloon (R154 600), 6.50% linked interest rate. Cost of credit R453 684. Excludes an initiation fee of R1 208 and a monthly service fee of R68 incl. VAT. 3-month payment holiday applies. Finance subject to approval. Ts and Cs apply."
     },
     {
       "id": "citroen-basalt-plus-at",
@@ -3386,8 +3599,8 @@ main{padding-block:0 64px}
         "cars/citroen-basalt-max-1",
         "cars/citroen-basalt-max-2"
       ],
-      "monthlyFixed": 4021,
-      "monthlyNote": "Citroën South Africa's published finance offer, checked 23 November 2026: 72 months, 10% deposit, 40% balloon, 6.76% linked interest rate, retail price R369 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      "monthlyFixed": 4140,
+      "monthlyNote": "R369 900 retail. 72 months, 10% deposit (R36 990), 40% balloon (R147 960), 6.99% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R441 915. Excludes an initiation fee of R1 208. 90-day payment holiday applies. Finance subject to approval. Ts and Cs apply."
     },
     {
       "id": "citroen-aircross-max-7-at",
@@ -3428,8 +3641,8 @@ main{padding-block:0 64px}
         "cars/jeep-wrangler-sahara-0",
         "cars/jeep-wrangler-sahara-1"
       ],
-      "monthlyFixed": 12750,
-      "monthlyNote": "Jeep South Africa's published finance offer, checked 23 November 2026: 36 months, 10% deposit, 75% guaranteed future value (15 000 km a year), 7.77% linked interest rate, retail price R1 315 900 incl. VAT. Excludes the R1 208 initiation fee and R68 monthly service fee. Subject to finance approval. Ts and Cs apply; final terms depend on the finance house."
+      "monthlyFixed": 13165,
+      "monthlyNote": "R1 315 900 retail. 48 months, 10% deposit (R131 590), Guaranteed Future Value 69% (R907 971), 8.16% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R1 526 704. Excludes an initiation fee of R1 208. Finance subject to approval. Ts and Cs apply."
     },
     {
       "id": "jeep-wrangler-rubicon",
@@ -3486,7 +3699,7 @@ main{padding-block:0 64px}
       "transmission": "Manual",
       "fuel": "Petrol",
       "price": 308900,
-      "priceMode": "calculated",
+      "priceMode": "cash",
       "images": [
         "cars/fiat-500-1"
       ]
@@ -4382,6 +4595,9 @@ main{padding-block:0 64px}
 
 <div class="tipbox" id="tipbox" role="tooltip" hidden=""></div>
 <a class="wa-float" id="wa-float" hidden="" target="_blank" rel="noopener" aria-label="Chat to us on WhatsApp"></a>
+<!-- cookie banner: the kit's two files, unedited (settings are in the head snippet) -->
+<link rel="stylesheet" href="img/consent/consent-banner.css?v=1.0">
+<script src="img/consent/consent-banner.js?v=1.0" defer></script>
 
 <script>
 /* round 9: ownership promises reveal and count up when they scroll into view
@@ -4463,6 +4679,7 @@ function prelaunchCheck(data){
     if (!(v.images || []).length) add(where, 'no photos');
     if (v.condition !== 'new' && (v.km == null || v.km === '' || typeof v.km === 'string')) add(where, 'mileage not set');
     if (v.priceMode === 'fixed' && !v.monthlyFixed) add(where, 'fixed monthly payment not set');
+    if (v.priceNote && v.priceMode === 'calculated') add(where, 'price has a label (' + v.priceNote + '): set the monthly payment to "Typed in" or "None"');
     [['title','car name'],['sub','model line'],['year','year'],['transmission','gearbox'],['fuel','fuel type']].forEach(([k, l]) => {
       if (v[k] == null || String(v[k]).trim() === '') add(where, l + ' is empty'); });
     if (!(data.sections || []).some(s => (s.vehicles || []).includes(v.id))) add(where, 'not in any section, so it does not show on the site');
@@ -4477,7 +4694,7 @@ function prelaunchCheck(data){
     ((pg.hero || {}).scenes || []).forEach((s, i) => { if (!s.image) add(W, `hero scene ${i + 1} has no image`); if (!s.title) add(W, `hero scene ${i + 1} has no title`); if (s.vehicle && !vIds.has(s.vehicle)) add(W, `hero scene ${i + 1} opens car "${s.vehicle}", which is not in the stock list`); });
     ((pg.brands || {}).items || []).forEach((x, i) => { if (!x.logo) add(W, `brand ${i + 1} (${x.name || 'no name'}) has no logo`); if (x.href && x.href[0] === '#' && x.href.length > 1 && !secIds.has(x.href.slice(1))) add(W, `brand ${x.name} links to "${x.href}", which is not a section`); });
     const infoKeys = new Set(Object.keys(pg.info || {}));
-    [...((pg.services || {}).items || []).filter(x => x.info).map(x => x.info), ...(pg.footLinks || []).map(x => x[1]).filter(k => !/\./.test(k))].forEach(k => { if (!infoKeys.has(k)) add(W, `link to owner info page "${k}", which doesn't exist`); });
+    [...((pg.services || {}).items || []).filter(x => x.info).map(x => x.info), ...(pg.footLinks || []).map(x => x[1]).filter(k => !/\./.test(k) && k !== 'cookies')].forEach(k => { if (!infoKeys.has(k)) add(W, `link to owner info page "${k}", which doesn't exist`); });
   }
   if (!(data.dealer.finance && data.dealer.finance.confirmed)) add('Finance defaults', 'finance terms not confirmed for this client (set "confirmed": true once checked)');
   if (data.meta && data.meta.master) add('Template', 'this is the master template: export a working copy and build from that');
@@ -4583,7 +4800,11 @@ const R = (n, cents=false) => {
 };
 const condLabel = c => ({new:'New', demo:'Demo', used:'Pre-owned'})[c];
 const isPOA = v => v.priceMode === 'poa';
-const priceText = v => isPOA(v) ? 'Price on request' : R(v.price);
+/* Dec 2026: PR = price with the car's own label (v.priceNote, e.g. "excl. VAT"); hasPrice is false for a fixed offer whose retail price is not known yet */
+const hasPrice = v => !isPOA(v) && v.price > 0;
+const PR = v => R(v.price) + (v.priceNote ? ' ' + v.priceNote : '');
+const priceNoteFor = v => v && v.priceNote ? 'Price ' + v.priceNote + '. ' + String(D.priceNote).replace(/^[^.]*incl\. VAT\.\s*/i, '') : D.priceNote;
+const priceText = v => isPOA(v) ? 'Price on request' : hasPrice(v) ? PR(v) : monthlyOf(v) != null ? R(monthlyOf(v)) + ' pm' : 'Price on request';
 function termsFor(v){ return Object.assign({}, D.finance, v.finance || {}); }
 function calc(price, t){
   if (!price) return { deposit:0, balloon:0, principal:0, inst:0, monthly:0, total:0 };
@@ -4598,6 +4819,7 @@ function calc(price, t){
 function monthlyOf(v){
   if (v.priceMode === 'cash' || v.priceMode === 'poa') return null;
   if (v.priceMode === 'fixed') return v.monthlyFixed;
+  if (v.priceNote || !v.price) return null;   // Dec 2026: never work out an instalment on a labelled (excl. VAT) or missing price
   return calc(v.price, termsFor(v)).monthly;
 }
 function basisText(v, t){
@@ -4783,7 +5005,7 @@ function brandsHTML(){
     const id = String(x.href || '').replace(/^#/, ''), sec = DATA.sections.find(s => s.id === id), cars = sec ? sec.vehicles.map(k => V[k]).filter(Boolean) : [];
     const from = cars.filter(v => v.price).reduce((m, v) => Math.min(m, v.price), Infinity);
     const img = x.image || (lu.find(l => l && l.section === id) || {}).image || '';
-    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ' · from ' + R(from) : ''}` : '');
+    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ' · from ' + PR(cars.find(v => v.price === from)) : ''}` : '');
     return `<a class="bg-tile" href="${esc(x.href || '#')}" style="--i:${i}" aria-label="${esc(x.name)}${line ? ', ' + esc(line) : ''}">
       <span class="bg-logo">${x.logo ? `<img src="${IMG(x.logo)}" alt="" loading="lazy">` : `<b>${esc(x.name)}</b>`}</span>
       <span class="bg-car">${img ? `<img src="${SRC(img, 'card')}" data-orig="${IMG(img)}" alt="" loading="lazy">` : ''}</span>
@@ -4912,7 +5134,7 @@ function featureHTML(v, b, s){
 /* footer */
 $('#foot').innerHTML = `
   <div id="contact" class="foot-brand">${D.logo ? `<img src="${IMG(D.logo)}" alt="${esc(D.name)}">` : `<h4>${esc(D.name)}</h4>`}<p>${esc(D.tagline || '')}</p>
-    ${(D.social || []).length ? `<p class="foot-social">${D.social.map(s => `<a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join('')}</p>` : ''}${(PG.footLinks || []).length ? `<div class="foot-links">${PG.footLinks.map(x => /\./.test(x[1]) ? `<a href="${esc(x[1])}">${esc(x[0])}</a>` : `<button data-pginfo="${esc(x[1])}">${esc(x[0])}</button>`).join('')}</div>` : ''}</div>
+    ${(D.social || []).length ? `<p class="foot-social">${D.social.map(s => `<a href="${esc(s[1])}" target="_blank" rel="noopener">${esc(s[0])}</a>`).join('')}</p>` : ''}${(PG.footLinks || []).length ? `<div class="foot-links">${PG.footLinks.map(x => x[1] === 'cookies' ? `<button type="button" data-consent-open>${esc(x[0])}</button>` : /\./.test(x[1]) ? `<a href="${esc(x[1])}">${esc(x[0])}</a>` : `<button data-pginfo="${esc(x[1])}">${esc(x[0])}</button>`).join('')}</div>` : ''}</div>
   <div><h4>Showroom</h4><p>${esc(D.address)}</p><p style="margin-top:8px"><a class="link" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(D.mapsQuery || D.address)}" target="_blank" rel="noopener">Get directions →</a></p></div>
   <div><h4>Contact</h4><p class="num">${[D.phone, D.phoneAlt].filter(Boolean).map(esc).join(' / ')}</p>${D.mobile ? `<p class="num">${esc(D.mobile)} (WhatsApp)</p>` : ''}${D.email ? `<p>${esc(D.email)}</p>` : ''}</div>
   <div><h4>Trading hours</h4>${D.hours.map(x => `<p class="num">${esc(x[0])}: ${esc(x[1])}</p>`).join('')}${PG.footNote ? `<p class="foot-note">${esc(PG.footNote)}</p>` : ''}</div>`;
@@ -5009,7 +5231,7 @@ function lineupHTML(list){
   const items = list.filter(x => x && x.image).map(x => {
     const sec = DATA.sections.find(s => s.id === x.section), cars = sec ? sec.vehicles.map(id => V[id]).filter(Boolean) : [];
     const from = cars.filter(v => v.price).reduce((m, v) => Math.min(m, v.price), Infinity);
-    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ', from ' + R(from) : ''}` : '');
+    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ', from ' + PR(cars.find(v => v.price === from)) : ''}` : '');
     return {...x, line};
   });
   if (!items.length) return '';
@@ -5085,9 +5307,9 @@ function wirePage(){
 function statsHTML(v){
   const m = monthlyOf(v), cols = [];
   const tip1 = `<button class="tip" data-tip="${esc(basisText(v))}" aria-label="How this monthly payment is worked out">1</button>`;
-  const tipI = `<button class="tip i" data-tip="${esc(D.priceNote)}" aria-label="About this price">i</button>`;
+  const tipI = `<button class="tip i" data-tip="${esc(priceNoteFor(v))}" aria-label="About this price">i</button>`;
   if (m != null) cols.push(`<div><dt>Monthly payment</dt><dd class="num">${R(m, true)}${tip1}</dd></div>`);
-  cols.push(isPOA(v) ? `<div><dt>Price</dt><dd>On request</dd></div>` : `<div><dt>Purchase price ${tipI}</dt><dd class="num">${R(v.price)}</dd></div>`);
+  if (isPOA(v)) cols.push(`<div><dt>Price</dt><dd>On request</dd></div>`); else if (hasPrice(v)) cols.push(`<div><dt>Purchase price ${tipI}</dt><dd class="num">${PR(v)}</dd></div>`);
   if (v.condition !== 'new') cols.push(`<div><dt>Mileage</dt><dd class="num">${grp(v.km)} km</dd></div>`);
   return `<dl class="stats n${cols.length}">${cols.join('')}</dl>`;
 }
@@ -5095,10 +5317,10 @@ function compactBody(v){
   const m = monthlyOf(v);
   const meta = [`<b>${condLabel(v.condition)}</b>`, v.year, v.condition !== 'new' ? grp(v.km) + ' km' : esc(v.transmission)].filter(Boolean).join(' · ');
   const tip1 = `<button class="tip" data-tip="${esc(basisText(v))}" aria-label="How this monthly payment is worked out">1</button>`;
-  const tipI = `<button class="tip i" data-tip="${esc(D.priceNote)}" aria-label="About this price">i</button>`;
+  const tipI = `<button class="tip i" data-tip="${esc(priceNoteFor(v))}" aria-label="About this price">i</button>`;
   const price = m != null
-    ? `<div class="m num">${R(m, true)}<small>pm</small>${tip1}</div><div class="p num">${R(v.price)} ${tipI}</div>`
-    : isPOA(v) ? `<div class="m">On request</div><div class="p">Ask us for the price</div>` : `<div class="m num">${R(v.price)}</div><div class="p">Cash price ${tipI}</div>`;
+    ? `<div class="m num">${R(m, true)}<small>pm</small>${tip1}</div><div class="p num">${hasPrice(v) ? PR(v) + ' ' + tipI : 'Dealer finance offer'}</div>`
+    : isPOA(v) ? `<div class="m">On request</div><div class="p">Ask us for the price</div>` : `<div class="m num">${PR(v)}</div><div class="p">Cash price ${tipI}</div>`;
   return `<h3 class="c-title">${cLink(v)}</h3><p class="c-sub">${esc(v.sub)}</p><p class="c-meta">${meta}</p><div class="c-price">${price}</div>`;
 }
 function cardHTML(v, cta, style){
@@ -5141,8 +5363,8 @@ function promoOf(v){
   return {style, image: p.image || v.images[0], kind: p.image ? 'site' : 'card', focus: p.focus || '50% 50%', focusMobile: p.focusMobile || p.focus || '50% 50%',
     tint: p.tint || '', watermark: p.watermark || '', kicker: p.kicker || '', badge: p.badge || '', title: p.title || v.title,
     sub: p.sub != null ? p.sub : v.sub,
-    headline: p.headline || (fixed ? R(m) + ' pm*' : isPOA(v) ? 'On request' : R(v.price)),
-    note: p.note != null ? p.note : (fixed ? R(v.price) + ' retail' : ''),
+    headline: p.headline || (fixed ? R(m) + ' pm*' : isPOA(v) ? 'On request' : PR(v)),
+    note: p.note != null ? p.note : (fixed && hasPrice(v) ? PR(v) + ' retail' : ''),
     text: p.text != null ? p.text : (v.extra || ''), terms: p.terms || 'Ts and Cs apply.'};
 }
 function promoSlide(v, i, n, s){
@@ -5186,6 +5408,15 @@ function fitPromo(box){
     const room = w.closest('.pr-s').clientWidth * 0.92;
     let fs = parseFloat(getComputedStyle(w).fontSize);
     while (room > 0 && w.scrollWidth > room && fs > 20) { fs -= 2; w.style.fontSize = fs + 'px'; }
+  });
+  /* Dec 2026: tablet/desktop slides have a fixed height; a badge plus long terms could push the text past it. Trim the padding first, then the figure. */
+  $$('.pr-s', box).forEach(sl => { const tx = sl.querySelector('.pr-tx'); if (!tx) return; tx.style.paddingTop = tx.style.paddingBottom = '';
+    if (PHONE.matches) return;
+    const H = sl.clientHeight, over = tx.offsetHeight - H; if (!H || over <= 0) return;
+    const pad = parseFloat(getComputedStyle(tx).paddingTop);
+    tx.style.paddingTop = tx.style.paddingBottom = Math.max(14, pad - Math.ceil(over / 2) - 2) + 'px';
+    const b = tx.querySelector('.pr-fig b'); let fs = b ? parseFloat(getComputedStyle(b).fontSize) : 0;
+    while (b && tx.offsetHeight > H && fs > 22) { fs -= 2; b.style.fontSize = fs + 'px'; }
   });
 }
 function wirePromos(){
@@ -5308,7 +5539,7 @@ $$('.stock').forEach(s => { if (!$('.rail', s)) return; rail($('.rail', s)); rai
 /* ---------- stat row fit: 3 columns if every value fits, else stack the whole rail ---------- */
 function fitStats(scope){
   $$('.rail', scope || document).forEach(r => {
-    const rows = $$('.stats.n3', r); if (!rows.length) return;
+    const n3 = $$('.stats.n3', r), rows = n3.length ? n3 : $$('.stats.n2', r); if (!rows.length) return;   // Dec 2026: a rail of new cars stacks too when a labelled price (excl. VAT) does not fit beside the instalment
     rows.forEach(s => s.classList.remove('stack'));
     const over = rows.some(s => $$('dd, dt', s).some(e => e.scrollWidth > e.clientWidth + 1));
     if (over) rows.forEach(s => s.classList.add('stack'));
@@ -5381,7 +5612,7 @@ $('#ctray-clr').onclick = () => { cmp = []; syncCmp(); };
 $('#ctray-go').onclick = () => {
   const vs = cmp.map(id => V[id]);
   const rows = [
-    ['Purchase price', v => isPOA(v) ? null : v.price, v => priceText(v), 'min'],
+    ['Purchase price', v => hasPrice(v) ? v.price : null, v => priceText(v), 'min'],
     ['Monthly payment', v => monthlyOf(v), v => monthlyOf(v) != null ? R(monthlyOf(v), true) : isPOA(v) ? 'On request' : 'Cash price only', 'min'],
     ['Condition', null, v => condLabel(v.condition)],
     ['Year', null, v => v.year],
@@ -5541,11 +5772,11 @@ $('#vp-share').onclick = async () => {
 function priceBlockHTML(v){
   const m = monthlyOf(v);
   if (isPOA(v)) return `<div class="lbl">Price</div><div class="price-big">On request</div><div class="price-list">Call or WhatsApp us for the price and finance options.</div>`;
-  if (m == null) return `<div class="lbl">Purchase price <button class="tip i" data-tip="${esc(D.priceNote)}" aria-label="About this price">i</button></div>
-    <div class="price-big num">${R(v.price)}</div><div class="price-list">Cash or finance on request</div>`;
+  if (m == null) return `<div class="lbl">Purchase price <button class="tip i" data-tip="${esc(priceNoteFor(v))}" aria-label="About this price">i</button></div>
+    <div class="price-big num">${PR(v)}</div><div class="price-list">Cash or finance on request</div>`;
   return `<div class="lbl">Price<button class="tip" data-tip="${esc(basisText(v))}" data-live-tip aria-label="How this monthly payment is worked out">1</button></div>
     <div class="price-big num"><span data-live-monthly>${R(m, true)}</span> per month</div>
-    <div class="price-list num">Purchase price: ${R(v.price)}</div>`;
+    ${hasPrice(v) ? `<div class="price-list num">Purchase price: ${PR(v)}</div>` : ''}`;
 }
 function vpHTML(v, m){
   const isUsed = v.condition === 'used';
@@ -5634,7 +5865,7 @@ function vpHTML(v, m){
     <section class="vsec">
       <div><h2>Disclaimers</h2></div>
       <div>
-        ${[['1 Price disclaimer', D.priceNote + ' Prices are subject to change without notice and the vehicle is subject to availability. E&OE.'],
+        ${[['1 Price disclaimer', priceNoteFor(v) + ' Prices are subject to change without notice and the vehicle is subject to availability. E&OE.'],
            ['2 Finance disclaimer', D.finance.disclaimer + ' Finance provided by ' + D.finance.provider + '.'],
            ['Image disclaimer', 'Images are for illustration and may show optional equipment. Colours may vary on screen.']].map((d,i) => `
           <div class="acc"><button aria-expanded="false" aria-controls="acc-${i}">${esc(d[0])} ${ic.down}</button><div class="acc-p" id="acc-${i}" hidden>${esc(d[1])}</div></div>`).join('')}
@@ -5647,9 +5878,9 @@ function financeHTML(v){
   if (isPOA(v)) return `<section class="vsec"><div><h2>Financing</h2><p class="lead">This car is priced on request. Ask us for the price and we'll include finance options with it.</p></div>
     <div class="fixed-box"><div class="lbl">Price</div><div class="price-big">On request</div><p class="note">Apply for finance now and our team will come back to you with the price and your options.</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><button class="btn pri" data-go="enquire">Ask for the price</button><button class="btn ac" data-form="finance">Apply for finance</button></div></div></section>`;
   if (v.priceMode === 'cash') return `<section class="vsec"><div><h2>Financing</h2><p class="lead">This vehicle is advertised at its cash price. Finance is available on application.</p></div>
-    <div class="fixed-box"><div class="lbl">Purchase price</div><div class="price-big num">${R(v.price)}</div><p class="note">Apply and our finance team will send you options from the major banks.</p><button class="btn ac" data-form="finance" style="margin-top:14px">Apply for finance</button></div></section>`;
+    <div class="fixed-box"><div class="lbl">Purchase price</div><div class="price-big num">${PR(v)}</div><p class="note">Apply and our finance team will send you options from the major banks.</p><button class="btn ac" data-form="finance" style="margin-top:14px">Apply for finance</button></div></section>`;
   if (v.priceMode === 'fixed') return `<section class="vsec"><div><h2>Financing</h2><p class="lead">This is a fixed dealer finance offer.</p></div>
-    <div class="fixed-box"><div class="lbl">Monthly payment</div><div class="price-big num">${R(v.monthlyFixed, true)} <small style="font-size:18px;color:var(--muted)">per month</small></div><p class="note">${esc(v.monthlyNote)}</p><p class="note num">Purchase price: ${R(v.price)}</p><button class="btn ac" data-form="finance" style="margin-top:14px">Apply for finance</button></div></section>`;
+    <div class="fixed-box"><div class="lbl">Monthly payment</div><div class="price-big num">${R(v.monthlyFixed, true)} <small style="font-size:18px;color:var(--muted)">per month</small></div><p class="note">${esc(v.monthlyNote)}</p>${hasPrice(v) ? `<p class="note num">Purchase price: ${PR(v)}</p>` : ''}<button class="btn ac" data-form="finance" style="margin-top:14px">Apply for finance</button></div></section>`;
   const t = terms;
   const depSteps = Math.round(t.depositMax / 5), balSteps = Math.round(t.balloonMax / 5);
   return `<section class="vsec" id="vs-finance">
@@ -5962,17 +6193,25 @@ function openFormDrawer(type, v){
 }
 
 /* ---------- tracking (dataLayer for GTM; no personal details are ever pushed) ---------- */
-/* Meta Pixel (17 Nov 2026): built in, so do NOT also add it in GTM. Loads only on the hosts in settings.tracking.metaPixelHosts
+/* Meta Pixel (17 Nov 2026): built in, so do NOT also add it in GTM. Since 24 Nov 2026 it waits for advertising consent (see below). Loads only on the hosts in settings.tracking.metaPixelHosts
    (the live site), never on staging or local files. PageView on load; ViewContent when a car opens; Lead when a form is sent;
    Contact on a phone or WhatsApp tap. No names, emails or phone numbers are sent. */
 const PIXEL = (() => { const t = (DATA.settings || {}).tracking || {}, id = String(t.metaPixelId || '');
   return /^\d{8,20}$/.test(id) && (t.metaPixelHosts || []).includes(location.hostname) ? id : ''; })();
-if (PIXEL) { try {
+/* Cookie banner (24 Nov 2026): the pixel is not in GTM, so the banner cannot hold it back by itself. It loads only once the visitor
+   allows advertising (now, or from a saved choice), and is revoked if they later decline. No banner on the page = no pixel. */
+let pixelOn = false;
+const pixelStart = () => { if (!PIXEL || pixelOn) return; pixelOn = true; try {
+  if (window.fbq) { fbq('consent', 'grant'); return; }
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
   s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', PIXEL); fbq('track', 'PageView'); } catch(_) {} }
-const pixelTrack = (event, p) => { if (!PIXEL || !window.fbq) return; try {
+  fbq('init', PIXEL); fbq('track', 'PageView'); } catch(_) {} };
+const pixelStop = () => { if (!pixelOn) return; pixelOn = false; try { fbq('consent', 'revoke'); } catch(_) {} };
+(cc => { if (!cc) return; const c = cc.get(), set0 = cc.set;
+  cc.set = function (a, m) { const r = set0.apply(cc, arguments); m ? pixelStart() : pixelStop(); return r; };
+  if (c && c.m) pixelStart(); })(window.cookieConsent);
+const pixelTrack = (event, p) => { if (!PIXEL || !pixelOn || !window.fbq) return; try {
   if (event === 'vehicle_view') fbq('track', 'ViewContent', {content_ids: [p.stock || p.vehicle], content_type: 'vehicle', content_name: p.vehicle_name, content_category: p.condition, value: p.price || 0, currency: 'ZAR'});
   else if (event === 'lead_success') fbq('track', 'Lead', {content_name: p.vehicle_name || p.form_type, content_category: p.lead_group});
   else if (event === 'click_call' || event === 'click_whatsapp') fbq('track', 'Contact', {content_category: event === 'click_call' ? 'call' : 'whatsapp', content_name: p.click_location || ''});
@@ -6139,7 +6378,7 @@ if (!CARPAGE && !document.querySelector('script[type="application/ld+json"]')) {
     ...(geo ? {"geo":{"@type":"GeoCoordinates", "latitude":+geo[2], "longitude":+geo[1]}} : {}),
     ...(hours.length ? {"openingHoursSpecification":hours} : {}),
     ...((D.social || []).length ? {"sameAs":D.social.map(x => x[1])} : {}),
-    "makesOffer": DATA.vehicles.filter(v => SEC_OF[v.id]).map(v => ({ "@type":"Offer", ...(isPOA(v) ? {} : {"price":v.price}), "priceCurrency":"ZAR", "availability":"https://schema.org/InStock",
+    "makesOffer": DATA.vehicles.filter(v => SEC_OF[v.id]).map(v => ({ "@type":"Offer", ...(hasPrice(v) ? {"price":v.price, .../excl/i.test(v.priceNote || '') ? {"priceSpecification":{"@type":"UnitPriceSpecification","price":v.price,"priceCurrency":"ZAR","valueAddedTaxIncluded":false}} : {}} : {}), "priceCurrency":"ZAR", "availability":"https://schema.org/InStock",
       "url": PAGES ? ABS('cars/' + v.slug + '/') : carHref(v),
       "itemOffered": { "@type":"Car", "name":`${v.year} ${v.title} ${v.sub}`.replace(/^(\d{4}) \1 /, '$1 '), "brand":{"@type":"Brand","name":content(v).make || v.make || v.title.split(' ').find(w => !/^\d+$/.test(w))}, "vehicleModelDate":String(v.year),
         "itemCondition": v.condition === 'new' ? "https://schema.org/NewCondition" : "https://schema.org/UsedCondition",
