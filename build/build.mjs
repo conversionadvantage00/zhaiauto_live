@@ -79,6 +79,8 @@ log(`${keys.size} files -> ${fs.readdirSync(path.join(OUT, 'img/r'), {recursive:
 const IMG_M = path.join(ROOT, 'img', 'm');   // 25 Nov 2026: only the img/m folder itself is left out (the old rule also dropped img/meta and img/media, so the favicon and share image were missing on the live site)
 fs.cpSync(path.join(ROOT, 'img'), path.join(OUT, 'img'), {recursive: true, filter: src => src !== IMG_M && !src.startsWith(IMG_M + path.sep)});
 for (const f of ['privacy.html', '_headers', '_redirects']) if (fs.existsSync(path.join(ROOT, f))) fs.copyFileSync(path.join(ROOT, f), path.join(OUT, f));
+// Google Search Console ownership file(s): must stay at the top of the live site to stay verified
+for (const f of fs.readdirSync(ROOT)) if (/^google[0-9a-f]+\.html$/.test(f)) fs.copyFileSync(path.join(ROOT, f), path.join(OUT, f));
 
 // ---------- favicon (25 Nov 2026): Google and browsers also ask for /favicon.ico at the top of the site, and Google wants a size that is a multiple of 48 px ----------
 const ICO = path.join(ROOT, 'img/meta/favicon.ico'), ICON512 = path.join(ROOT, 'img/meta/icon-512.png');
