@@ -76,8 +76,15 @@ await pool(jobs, Math.max(2, Math.min(8, os.cpus().length)));
 log(`${keys.size} files -> ${fs.readdirSync(path.join(OUT, 'img/r'), {recursive: true}).filter(f => /\.\w+$/.test(f)).length} copies in img/r`);
 
 // ---------- originals (fallbacks, share images, logos, fonts); the old phone copies in img/m are not needed here ----------
-fs.cpSync(path.join(ROOT, 'img'), path.join(OUT, 'img'), {recursive: true, filter: src => !src.startsWith(path.join(ROOT, 'img', 'm'))});
-for (const f of ['privacy.html', '_headers']) if (fs.existsSync(path.join(ROOT, f))) fs.copyFileSync(path.join(ROOT, f), path.join(OUT, f));
+const IMG_M = path.join(ROOT, 'img', 'm');   // 25 Nov 2026: only the img/m folder itself is left out (the old rule also dropped img/meta and img/media, so the favicon and share image were missing on the live site)
+fs.cpSync(path.join(ROOT, 'img'), path.join(OUT, 'img'), {recursive: true, filter: src => src !== IMG_M && !src.startsWith(IMG_M + path.sep)});
+for (const f of ['privacy.html', '_headers', '_redirects']) if (fs.existsSync(path.join(ROOT, f))) fs.copyFileSync(path.join(ROOT, f), path.join(OUT, f));
+
+// ---------- favicon (25 Nov 2026): Google and browsers also ask for /favicon.ico at the top of the site, and Google wants a size that is a multiple of 48 px ----------
+const ICO = path.join(ROOT, 'img/meta/favicon.ico'), ICON512 = path.join(ROOT, 'img/meta/icon-512.png');
+if (fs.existsSync(ICO)) fs.copyFileSync(ICO, path.join(OUT, 'favicon.ico'));
+const HAS192 = fs.existsSync(ICON512);
+if (HAS192) await sharp(ICON512).resize(192, 192).png().toFile(path.join(OUT, 'img/meta/icon-192.png'));
 
 // ---------- page helpers ----------
 const RESP_JSON = JSON.stringify(RESP).replace(/</g, '\\u003c');
@@ -93,6 +100,7 @@ const onSite = DATA.vehicles.filter(v => SEC_OF[v.id]);
 function setHead(html, {base, title, desc, url, image, imageW, imageH, imageAlt, extra}) {
   html = once(html, '<meta charset=utf8>', `<meta charset=utf8>\n<base href="${base}">`, 'charset');
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`);
+  if (HAS192) html = html.replace('<link rel="apple-touch-icon"', '<link rel="icon" type="image/png" sizes="192x192" href="img/meta/icon-192.png">\n<link rel="apple-touch-icon"');
   const meta = (attr, name, val) => { const re = new RegExp(`(<meta ${attr}="${name}" content=")[^"]*(")`); if (re.test(html)) html = html.replace(re, `$1${esc(val)}$2`); };
   meta('name', 'description', desc); meta('property', 'og:title', title); meta('property', 'og:description', desc);
   meta('property', 'og:url', url); meta('property', 'og:image', image); meta('name', 'twitter:title', title);
