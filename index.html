@@ -1110,6 +1110,11 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
 .pr-fig{margin:18px 0 0;display:flex;flex-direction:column;gap:6px}
 .pr-fig b{font-family:var(--display);font-weight:800;font-stretch:125%;font-size:clamp(50px,6.6vw,108px);line-height:.9;letter-spacing:-.01em;white-space:nowrap}
 .pr-fig small{font-size:15px;font-weight:500;opacity:.8}
+.pr-key{margin:16px 0 0;display:inline-flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:14px;border:1.5px solid var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);max-width:100%}
+.pr-key svg{flex:none;width:22px;height:22px;padding:3px;border-radius:50%;background:var(--accent);color:#fff;box-sizing:border-box}
+.pr-key span{display:flex;flex-direction:column;gap:1px;min-width:0}
+.pr-key b{font-size:16.5px;font-weight:700;line-height:1.25;letter-spacing:-.005em}
+.pr-key i{font-style:normal;font-size:13.5px;line-height:1.35;opacity:.8}
 .pr-txt{margin:16px 0 0;font-size:17px;line-height:1.5;max-width:42ch;opacity:.88}
 .pr-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
 .pr-terms{margin:14px 0 0;font-size:12px;line-height:1.45;opacity:.6;max-width:56ch}
@@ -2367,6 +2372,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 386500,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-aircross-max-0",
@@ -2381,14 +2387,14 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
         "focus": "50% 62%",
         "focusMobile": "50% 68%",
         "tint": "#e9e3dc",
-        "badge": "3-month payment holiday",
         "kicker": "Citroën",
         "title": "Citroën C3 Aircross Max",
         "sub": "1.2T automatic, 5-seater",
         "headline": "R4 143 pm*",
-        "note": "R386 500 retail",
-        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
-        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+        "note": "72 months | 10% deposit | 40% balloon",
+        "text": "6.50% linked interest rate. 5-year/100 000 km warranty.",
+        "terms": "*R386 500 retail. 72 months, 10% deposit (R38 650), 40% balloon (R154 600), 6.50% linked interest rate. Cost of credit R453 684. Excludes an initiation fee of R1 208 and a monthly service fee of R68 incl. VAT. 3-month payment holiday applies. Finance subject to approval. Ts and Cs apply. While stocks last.",
+        "key": "3-month payment holiday"
       }
     },
     {
@@ -2438,6 +2444,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 317900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-c3-max-at-0",
@@ -2452,14 +2459,14 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
         "focus": "50% 55%",
         "focusMobile": "55% 55%",
         "tint": "#efe9e4",
-        "badge": "Service plan extended to 4 years/60 000 km",
         "kicker": "Citroën",
         "title": "Citroën C3 Max automatic",
         "sub": "1.2T, 6-speed automatic",
         "headline": "R3 602 pm*",
-        "note": "R317 900 retail",
-        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
-        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+        "note": "72 months | 10% deposit | 40% balloon",
+        "text": "7.54% linked interest rate. 5-year/100 000 km warranty.",
+        "terms": "*R317 900 retail. 72 months, 10% deposit (R31 790), 40% balloon (R127 160), 7.54% linked interest rate. Cost of credit R387 774. Excludes an initiation fee of R1 208 and a monthly service fee of R69 incl. VAT. Standard 2-year/30 000 km service plan extended to 4 years/60 000 km on this offer. Finance subject to approval. Ts and Cs apply. While stocks last.",
+        "key": "Service plan extended to 4 years/60 000 km"
       }
     },
     {
@@ -2508,6 +2515,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 369900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-basalt-max-0",
@@ -2522,14 +2530,14 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
         "focus": "45% 58%",
         "focusMobile": "45% 62%",
         "tint": "#e6e9ef",
-        "badge": "90-day payment holiday",
         "kicker": "Citroën",
         "title": "Citroën Basalt Max",
         "sub": "1.2T, 6-speed automatic",
         "headline": "R4 140 pm*",
-        "note": "R369 900 retail",
-        "text": "72 months, 10% deposit and a 40% balloon. 5-year/100 000 km warranty.",
-        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+        "note": "72 months | 10% deposit | 40% balloon",
+        "text": "6.99% linked interest rate. 5-year/100 000 km warranty.",
+        "terms": "*R369 900 retail. 72 months, 10% deposit (R36 990), 40% balloon (R147 960), 6.99% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R441 915. Excludes an initiation fee of R1 208. 90-day payment holiday applies. Finance subject to approval. Ts and Cs apply. While stocks last.",
+        "key": "90-day payment holiday"
       }
     },
     {
@@ -2555,8 +2563,8 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "promo": {
         "style": "split-rev",
         "image": "site/special-dec26-landtrek",
-        "focus": "50% 55%",
-        "focusMobile": "50% 58%",
+        "focus": "50% 62%",
+        "focusMobile": "50% 62%",
         "tint": "#ecebe8",
         "kicker": "Peugeot",
         "title": "Peugeot Landtrek",
@@ -2589,17 +2597,18 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "promo": {
         "style": "split",
         "image": "site/special-dec26-landtrek",
-        "focus": "50% 55%",
-        "focusMobile": "50% 58%",
+        "focus": "50% 62%",
+        "focusMobile": "50% 62%",
         "tint": "#e8ecef",
         "badge": "R30 000 accessories included",
         "kicker": "Peugeot",
         "title": "Peugeot Landtrek",
         "sub": "Professional double cab, 1.9D 4x2 manual",
         "headline": "R5 999 pm*",
-        "note": "3-month payment holiday",
+        "note": "",
         "text": "Includes rubberising, safety film, towbar, side steps and nudge bar.",
-        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+        "terms": "*No deposit and no balloon, at a linked interest rate of prime plus 1%. 3-month payment holiday applies. Includes an accessories package valued at R30 000: rubberising, safety film, towbar, side steps and nudge bar. Term, retail price and total cost of credit are available on request. Finance subject to approval. Ts and Cs apply. While stocks last.",
+        "key": "3-month payment holiday"
       }
     },
     {
@@ -2705,8 +2714,9 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
         "sub": "1.6T automatic",
         "headline": "R629 900",
         "note": "R799 900 retail",
-        "text": "48-month Guaranteed Future Value, panoramic sunroof and wireless Apple CarPlay and Android Auto.",
-        "terms": "Price shown includes the maximum deal assistance of R170 000. Includes a 5-year/105 000 km maintenance plan and a 5-year/100 000 km warranty. Ts and Cs apply. While stocks last."
+        "text": "Panoramic sunroof and wireless Apple CarPlay and Android Auto.",
+        "terms": "Price shown includes the maximum deal assistance of R170 000. Includes a 5-year/105 000 km maintenance plan and a 5-year/100 000 km warranty. Ts and Cs apply. While stocks last.",
+        "key": "48-month Guaranteed Future Value | 0% deposit, 57% guaranteed future value, 7.64% linked interest rate"
       }
     },
     {
@@ -2722,6 +2732,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 1315900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/jeep-wrangler-sahara-0",
@@ -2740,9 +2751,10 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
         "title": "Jeep Wrangler Sahara",
         "sub": "2.0L 4x4 automatic, 4-door",
         "headline": "R13 165 pm*",
-        "note": "R1 315 900 retail",
-        "text": "Guaranteed Future Value over 48 months, or buy at R1 315 900 with trade assist on qualifying trade-ins.",
-        "terms": "*Dealer finance offer, subject to approval. Ts and Cs apply. While stocks last."
+        "note": "48 months | 10% deposit | 69% Guaranteed Future Value",
+        "text": "8.16% linked interest rate. Trade assist of up to R160 000 on qualifying trade-ins.",
+        "terms": "*R1 315 900 retail. 48 months, 10% deposit (R131 590), Guaranteed Future Value 69% (R907 971), 8.16% linked interest rate. Instalment includes a monthly service fee of R69 incl. VAT. Cost of credit R1 526 704. Excludes an initiation fee of R1 208. Finance subject to approval. Ts and Cs apply. While stocks last.",
+        "key": "48-month Guaranteed Future Value | Future value guaranteed at 69% (R907 971)"
       }
     },
     {
@@ -3527,6 +3539,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 317900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-c3-max-at-0",
@@ -3549,6 +3562,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 386500,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-aircross-max-0",
@@ -3593,6 +3607,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 369900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/citroen-basalt-max-0",
@@ -3636,6 +3651,7 @@ html .cc{--cc-font:var(--font);--cc-title-font:var(--display);--cc-title-weight:
       "transmission": "Automatic",
       "fuel": "Petrol",
       "price": 1315900,
+      "hidePrice": true,
       "priceMode": "fixed",
       "images": [
         "cars/jeep-wrangler-sahara-0",
@@ -4801,7 +4817,7 @@ const R = (n, cents=false) => {
 const condLabel = c => ({new:'New', demo:'Demo', used:'Pre-owned'})[c];
 const isPOA = v => v.priceMode === 'poa';
 /* Dec 2026: PR = price with the car's own label (v.priceNote, e.g. "excl. VAT"); hasPrice is false for a fixed offer whose retail price is not known yet */
-const hasPrice = v => !isPOA(v) && v.price > 0;
+const hasPrice = v => !isPOA(v) && v.price > 0 && !v.hidePrice;   // hidePrice (Dec 2026): an instalment-led offer shows its instalment only, everywhere
 const PR = v => R(v.price) + (v.priceNote ? ' ' + v.priceNote : '');
 const priceNoteFor = v => v && v.priceNote ? 'Price ' + v.priceNote + '. ' + String(D.priceNote).replace(/^[^.]*incl\. VAT\.\s*/i, '') : D.priceNote;
 const priceText = v => isPOA(v) ? 'Price on request' : hasPrice(v) ? PR(v) : monthlyOf(v) != null ? R(monthlyOf(v)) + ' pm' : 'Price on request';
@@ -4846,7 +4862,7 @@ const SVC_IC = {
   maintenance:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>'
 };
 const cLink = v => PAGES ? `<a class="c-link" href="${esc(carHref(v))}">${esc(v.title)}</a>` : esc(v.title);
-const waLink = (v) => 'https://wa.me/' + D.whatsapp + '?text=' + encodeURIComponent(v ? `Hi ${D.name}, I'm interested in the ${v.year || ''} ${v.title} ${v.sub} ${v.stock ? ' (stock ' + v.stock + ')' : ''}${isPOA(v) ? '. Please send me the price.' : ' at ' + R(v.price) + '.'} ${carHref(v)}` : `Hi ${D.name}, I have a question.`);
+const waLink = (v) => 'https://wa.me/' + D.whatsapp + '?text=' + encodeURIComponent(v ? `Hi ${D.name}, I'm interested in the ${v.year || ''} ${v.title} ${v.sub} ${v.stock ? ' (stock ' + v.stock + ')' : ''}${isPOA(v) ? '. Please send me the price.' : ' at ' + priceText(v) + '.'} ${carHref(v)}` : `Hi ${D.name}, I have a question.`);
 
 /* ---------- optional: header hides on scroll down, reveals on scroll up ---------- */
 (function headerOnScroll(){
@@ -5003,9 +5019,9 @@ function brandsHTML(){
   const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
   const one = (x, i) => {
     const id = String(x.href || '').replace(/^#/, ''), sec = DATA.sections.find(s => s.id === id), cars = sec ? sec.vehicles.map(k => V[k]).filter(Boolean) : [];
-    const from = cars.filter(v => v.price).reduce((m, v) => Math.min(m, v.price), Infinity);
+    const from = cars.filter(hasPrice).reduce((m, v) => Math.min(m, v.price), Infinity);
     const img = x.image || (lu.find(l => l && l.section === id) || {}).image || '';
-    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ' · from ' + PR(cars.find(v => v.price === from)) : ''}` : '');
+    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ' · from ' + PR(cars.find(v => hasPrice(v) && v.price === from)) : ''}` : '');
     return `<a class="bg-tile" href="${esc(x.href || '#')}" style="--i:${i}" aria-label="${esc(x.name)}${line ? ', ' + esc(line) : ''}">
       <span class="bg-logo">${x.logo ? `<img src="${IMG(x.logo)}" alt="" loading="lazy">` : `<b>${esc(x.name)}</b>`}</span>
       <span class="bg-car">${img ? `<img src="${SRC(img, 'card')}" data-orig="${IMG(img)}" alt="" loading="lazy">` : ''}</span>
@@ -5230,8 +5246,8 @@ function wireBannerVideos(){
 function lineupHTML(list){
   const items = list.filter(x => x && x.image).map(x => {
     const sec = DATA.sections.find(s => s.id === x.section), cars = sec ? sec.vehicles.map(id => V[id]).filter(Boolean) : [];
-    const from = cars.filter(v => v.price).reduce((m, v) => Math.min(m, v.price), Infinity);
-    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ', from ' + PR(cars.find(v => v.price === from)) : ''}` : '');
+    const from = cars.filter(hasPrice).reduce((m, v) => Math.min(m, v.price), Infinity);
+    const line = x.line || (cars.length ? `${cars.length} model${cars.length === 1 ? '' : 's'}${isFinite(from) ? ', from ' + PR(cars.find(v => hasPrice(v) && v.price === from)) : ''}` : '');
     return {...x, line};
   });
   if (!items.length) return '';
@@ -5365,7 +5381,7 @@ function promoOf(v){
     sub: p.sub != null ? p.sub : v.sub,
     headline: p.headline || (fixed ? R(m) + ' pm*' : isPOA(v) ? 'On request' : PR(v)),
     note: p.note != null ? p.note : (fixed && hasPrice(v) ? PR(v) + ' retail' : ''),
-    text: p.text != null ? p.text : (v.extra || ''), terms: p.terms || 'Ts and Cs apply.'};
+    text: p.text != null ? p.text : (v.extra || ''), terms: p.terms || 'Ts and Cs apply.', key: p.key || ''};   // key (Dec 2026): the offer's main selling point, shown as a highlighted strip under the price ("Title | optional detail")
 }
 function promoSlide(v, i, n, s){
   const p = promoOf(v);
@@ -5376,6 +5392,7 @@ function promoSlide(v, i, n, s){
       ${p.badge ? `<span class="pr-badge">${esc(p.badge)}</span>` : ''}${p.kicker ? `<span class="eyb"><i aria-hidden="true"></i><span>${esc(p.kicker)}</span></span>` : ''}
       <h3>${esc(p.title)}</h3>${p.sub ? `<p class="pr-sub">${esc(p.sub)}</p>` : ''}
       <p class="pr-fig"><b class="num">${esc(p.headline)}</b>${p.note ? `<small>${esc(p.note)}</small>` : ''}</p>
+      ${p.key ? (k => `<p class="pr-key"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><span><b>${esc(k[0])}</b>${k[1] ? `<i>${esc(k[1])}</i>` : ''}</span></p>`)(String(p.key).split('|').map(x => x.trim())) : ''}
       ${p.text ? `<p class="pr-txt">${esc(p.text)}</p>` : ''}
       <div class="pr-acts"><button class="pg-btn pri" type="button" data-spot="${esc(v.id)}">${esc(s.cta || 'View offer')}</button><button class="pg-btn" type="button" data-enq="${esc(v.id)}">Enquire</button></div>
       ${p.terms ? `<p class="pr-terms">${esc(p.terms)}</p>` : ''}

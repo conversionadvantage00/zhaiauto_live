@@ -118,7 +118,7 @@ const shareImg = DATA.meta && DATA.meta.shareImage ? IMGURL(DATA.meta.shareImage
 // ---------- home page ----------
 const KM = n => n.toLocaleString('en-ZA').replace(/[,\u00a0\u202f]/g, ' ') + ' km';
 // Dec 2026: a price carries the car's own label (v.priceNote, e.g. "excl. VAT"); a fixed offer with no confirmed price shows its instalment only
-const priceOf = v => v.priceMode === 'poa' ? 'Price on request' : v.price ? R(v.price) + (v.priceNote ? ' ' + v.priceNote : '') : v.monthlyFixed ? '' : 'Price on request';
+const priceOf = v => v.priceMode === 'poa' ? 'Price on request' : v.price && !v.hidePrice ? R(v.price) + (v.priceNote ? ' ' + v.priceNote : '') : v.monthlyFixed ? '' : 'Price on request';
 const vatSpec = v => /excl/i.test(v.priceNote || '') ? {priceSpecification: {'@type': 'UnitPriceSpecification', price: v.price, priceCurrency: 'ZAR', valueAddedTaxIncluded: false}} : {};
 const carLine = v => [COND[v.condition] || '', priceOf(v), v.monthlyFixed ? `from ${R(v.monthlyFixed)} pm*` : '', v.condition !== 'new' && typeof v.km === 'number' ? KM(v.km) : '', v.transmission, v.fuel].filter(Boolean).join(', ');
 const HOURS = Array.isArray(D.hours) ? D.hours.filter(h => h && h[0]) : [];
@@ -143,7 +143,7 @@ const homeLD = (() => {
     ...(geo ? {geo: {'@type': 'GeoCoordinates', latitude: +geo[2], longitude: +geo[1]}} : {}),
     ...(hours.length ? {openingHoursSpecification: hours} : {}),
     ...(Array.isArray(D.social) && D.social.length ? {sameAs: D.social.map(x => x[1])} : {}),
-    makesOffer: onSite.map(v => ({'@type': 'Offer', ...(v.price && v.priceMode !== 'poa' ? {price: v.price, ...vatSpec(v)} : {}), priceCurrency: 'ZAR', availability: 'https://schema.org/InStock',
+    makesOffer: onSite.map(v => ({'@type': 'Offer', ...(v.price && v.priceMode !== 'poa' && !v.hidePrice ? {price: v.price, ...vatSpec(v)} : {}), priceCurrency: 'ZAR', availability: 'https://schema.org/InStock',
       url: `${SITE}cars/${v.slug}/`,
       itemOffered: {'@type': 'Car', name: nameOf(v), brand: {'@type': 'Brand', name: v.make || String(v.title).replace(/^\d{4}\s+/, '').split(' ')[0]}, vehicleModelDate: String(v.year),
         itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
@@ -210,7 +210,7 @@ for (const v of onSite) {
     vehicleModelDate: String(v.year), itemCondition: v.condition === 'new' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
     ...(v.condition !== 'new' && typeof v.km === 'number' ? {mileageFromOdometer: {'@type': 'QuantitativeValue', value: v.km, unitCode: 'KMT'}} : {}),
     ...(v.colour ? {color: v.colour} : {}), vehicleTransmission: v.transmission, fuelType: v.fuel, ...(v.stock ? {sku: String(v.stock)} : {}),
-    offers: {'@type': 'Offer', url, priceCurrency: 'ZAR', ...(v.price && v.priceMode !== 'poa' ? {price: v.price, ...vatSpec(v)} : {}), availability: 'https://schema.org/InStock',
+    offers: {'@type': 'Offer', url, priceCurrency: 'ZAR', ...(v.price && v.priceMode !== 'poa' && !v.hidePrice ? {price: v.price, ...vatSpec(v)} : {}), availability: 'https://schema.org/InStock',
       seller: {'@type': 'AutoDealer', name: D.name, telephone: D.phone, address: D.address, url: SITE}},
   };
   const extra = `<script>window.__CA_PAGES=1;window.__CA_CARPAGE=${JSON.stringify(v.slug)};window.__CA_RESP=${RESP_JSON}</script>\n` +
